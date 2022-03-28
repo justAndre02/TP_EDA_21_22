@@ -1,10 +1,14 @@
 /**
  * @file functions.c
  * @author André (a21112@alunos.ipca.pt)
- * @brief 
+ * @brief Criação de listas
  * @version 0.1
  * @date 2022-03-25
  * 
+ *  Funções de mainpulação de Listas Ligadas
+ * 
+ *  Ficheiro baseado no repositório do professor 
+ * @see https://github.com/luferIPCA/LESI-EDA-2122/tree/master/Aulas/GereMaquinas
  * @copyright Copyright (c) 2022
  * 
  */
@@ -12,4 +16,76 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include "functions.h"
+
+#define bool _Bool
+#define false 0
+#define true 1
+
+/**
+ * @brief Cria uma nova Maquina 
+ * 
+ * @param proc      novo processo
+ * @param nome      novo nome
+ * @return Maquina* 
+ */
+Maquina *NovaMaquina(int proc, char*nome){
+    Maquina *nova = (Maquina*) malloc(sizeof(Maquina));
+    nova->proc = proc;
+    strcpy(nova->nome, nome);
+    nova->next = NULL;
+    return nova;
+}
+
+/**
+ * @brief Insere a maquina ordenada pelo na lista
+ * 
+ * @param inicio        inicio da lista
+ * @param nova          inserção da nova maquina
+ * @return      Inicio da nova Lista 
+ */
+Maquina* InserirMaquina(Maquina* inicio, Maquina* nova) {
+    if (ExisteMaquina(inicio, nova->proc)) return inicio;
+
+    if (inicio == NULL){
+        inicio = nova;
+    } 
+    else
+    {
+        Maquina* aux = inicio;
+        Maquina* aux2 = NULL;
+        while (aux && aux->proc < nova->proc){
+            aux2 = aux;
+            aux = aux->next;
+        }
+        if (aux2 == NULL) 
+        {
+            nova->next = inicio;
+            inicio = nova;
+        }
+        else {
+            aux2->next = nova;
+            nova->next = aux;
+        }
+    }
+    return inicio;
+}
+
+/**
+ * @brief Verifica se uma maquina existe
+ * 
+ * @param inicio        inicio da lista
+ * @param proc          id da maquina a procurar
+ * @return true 
+ * @return false 
+ */
+bool ExisteMaquina(Maquina *inicio, int proc){
+    if (inicio == NULL) return false;
+    Maquina* aux = inicio;
+    while (aux != NULL) {
+        if (aux->proc == proc) return true;
+        aux = aux->next;
+    }
+    return false;
+}
 

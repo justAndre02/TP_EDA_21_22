@@ -13,8 +13,15 @@
 #include <string.h>
 #include <stdlib.h>
 
-typedef struct Maquina{
-    int Nmaquinas;
-    int Noperacoes;
-} Maquina;
+#include "functions.h"
+
+int main(){
+    Maquina* inicio;
+    inicio = NULL;
+
+    Maquina* nova;
+    nova = NovaMaquina(1, "teste");
+    inicio = InserirMaquina(inicio, nova);
+
+}
 
