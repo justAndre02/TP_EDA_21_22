@@ -23,14 +23,14 @@
  * @brief Cria uma nova Maquina
  *
  * @param proc      novo processo
- * @param nome      novo nome
+ * @param tempo     novo tempo
  * @return Maquina*
  */
-Maquina *NovaMaquina(int proc, char *nome)
+Maquina *NovaMaquina(int proc, int tempo)
 {
     Maquina *nova = (Maquina *)malloc(sizeof(Maquina));
     nova->proc = proc;
-    strcpy(nova->nome, nome);
+    strcpy(nova->tempo, tempo);
     nova->next = NULL;
     return nova;
 }
@@ -95,3 +95,54 @@ bool ExisteMaquina(Maquina *inicio, int proc)
     }
     return false;
 }
+
+/**
+ * @brief Encontra uma maquina e devolve o seu endereço
+ *
+ * @param inicio        inicio da lista
+ * @param proc          id da maquina a encontrar
+ * @return Endereço da maquina
+ */
+Maquina *ProcuraMaquina(Maquina *inicio, int proc)
+{
+    if (inicio == NULL)
+        return NULL; // lista vazia
+    else
+    {
+        Maquina *aux = inicio;
+        while (aux != NULL)
+        {
+            if (aux->proc == proc)
+            {
+                return (aux); // encontrei
+            }
+            aux = aux->next;
+        }
+        return NULL;
+    }
+}
+
+Maquina *LerMaquina(const char *nomeFicheiro)
+{
+    FILE *fp;
+    Maquina *inicio = NULL;
+
+    while (!feof(stdin))
+    {
+        char string[1000];
+        char nome[1000];
+        float nota;
+        fgets(string, 1000, stdin);
+        sscanf(string, "%s,%f", nome, &nota);
+        if (!feof(stdin))
+        {
+            if (strlen(nome) > 99)
+            {
+                printf("IGNORED>>%s>>%.4f\n", string, nota);
+            }
+            else
+            {
+                inicio = InserirMaquina();
+            }
+        }
+    }
