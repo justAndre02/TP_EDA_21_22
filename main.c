@@ -1,12 +1,12 @@
 /**
  * @file main.c
  * @author André (a21112@alunos.ipca.pt)
- * @brief 
+ * @brief
  * @version 0.1
  * @date 2022-03-21
- * 
+ *
  * @copyright Copyright (c) 2022
- * 
+ *
  */
 
 #include <stdio.h>
@@ -16,13 +16,12 @@
 
 #include "functions.h"
 
-int main(){
-    Maquina* inicio;
+int main()
+{
+    Maquina *inicio;
     inicio = NULL;
 
-    Maquina* nova;
+    Maquina *nova;
     nova = NovaMaquina(1, "teste");
     inicio = InserirMaquina(inicio, nova);
-
 }
-

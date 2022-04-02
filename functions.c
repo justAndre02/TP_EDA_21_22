@@ -106,7 +106,7 @@ bool ExisteMaquina(Maquina *inicio, int proc)
 Maquina *ProcuraMaquina(Maquina *inicio, int proc)
 {
     if (inicio == NULL)
-        return NULL; // lista vazia
+        return NULL; 
     else
     {
         Maquina *aux = inicio;
@@ -114,7 +114,7 @@ Maquina *ProcuraMaquina(Maquina *inicio, int proc)
         {
             if (aux->proc == proc)
             {
-                return (aux); // encontrei
+                return (aux); 
             }
             aux = aux->next;
         }
@@ -122,6 +122,12 @@ Maquina *ProcuraMaquina(Maquina *inicio, int proc)
     }
 }
 
+/**
+ * @brief Lê um ficheiro de texto linha a linha
+ * 
+ * @param nomeFicheiro          Identificação do ficheiro a ler
+ * @return Conteúdo do ficheiro de texto 
+ */
 Maquina *LerMaquina(const char *nomeFicheiro)
 {
     FILE *fp;
@@ -130,19 +136,20 @@ Maquina *LerMaquina(const char *nomeFicheiro)
     while (!feof(stdin))
     {
         char string[1000];
-        char nome[1000];
-        float nota;
+        char processo[1000];
+        float tempo;
         fgets(string, 1000, stdin);
-        sscanf(string, "%s,%f", nome, &nota);
+        sscanf(string, "%s,%f", processo, &tempo);
         if (!feof(stdin))
         {
-            if (strlen(nome) > 99)
+            if (strlen(processo) > 99)
             {
-                printf("IGNORED>>%s>>%.4f\n", string, nota);
+                printf("IGNORED>>%s>>%.4f\n", string, tempo);
             }
             else
             {
-                inicio = InserirMaquina();
+                inicio = NovaMaquina(inicio, processo);
             }
         }
     }
+}

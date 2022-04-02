@@ -34,7 +34,7 @@ typedef struct Operacao
 {
     int id;
     struct Maquina *first, *last;
-}Operacao;
+} Operacao;
 
 //  typedef struct Job{
 //	int cod;
@@ -42,6 +42,8 @@ typedef struct Operacao
 //  struct Maquina *first, *last;
 //}Job;
 
-Maquina *NovaMaquina(int proc, char *nome);
+Maquina *NovaMaquina(int proc, int tempo);
 Maquina *InserirMaquina(Maquina *inicio, Maquina *nova);
 bool ExisteMaquina(Maquina *inicio, int proc);
+Maquina *ProcuraMaquina(Maquina *inicio, int proc);
+Maquina *LerMaquina(const char *nomeFicheiro);
