@@ -14,6 +14,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include <assert.h>
 
 #define MAX 100
 #define M 40
@@ -27,19 +28,18 @@ typedef struct Maquina
     int proc;
     int tempo;
     struct Maquina *next, *prev;
-    struct Maquina *first, *last;
 } Maquina;
 
-typedef struct Operacao
-{
-    int id;
-    struct Maquina *first, *last;
-} Operacao;
+typedef struct Operacao{
+    int op;
+    struct Maquina *next, *prev;
+    struct Maquina*first, *last;
+}Operacao;
 
 
-Maquina *NovaMaquina(int proc, int tempo);
-Maquina *InserirMaquina(Maquina *inicio, Maquina *nova);
+Maquina *InserirMaquina(Maquina *lst, int proc, int tempo);
 bool ExisteMaquina(Maquina *inicio, int proc);
 Maquina *ProcuraMaquina(Maquina *inicio, int proc);
 Maquina *LerMaquina(const char *nomeFicheiro);
 Maquina *RemoveMaquina(Maquina* inicio, int proc);
+void EscreverMaquina(Operacao *lst);

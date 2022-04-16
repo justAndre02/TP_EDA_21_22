@@ -21,7 +21,5 @@ int main()
     Maquina *inicio;
     inicio = NULL;
 
-    Maquina *nova;
-    nova = NovaMaquina(1, "teste");
-    inicio = InserirMaquina(inicio, nova);
+    inicio = InserirMaquina(inicio, 1, 4);
 }

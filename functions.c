@@ -17,23 +17,11 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <assert.h>
+
 #include "functions.h"
 
-/**
- * @brief Cria uma nova Maquina
- *
- * @param proc      nova operação
- * @param tempo     novo tempo
- * @return Maquina*
- */
-Maquina *NovaMaquina(int proc, int tempo)
-{
-    Maquina *nova = (Maquina *)malloc(sizeof(Maquina));
-    nova->proc = proc;
-    strcpy(nova->tempo, tempo);
-    nova->next = NULL;
-    return nova;
-}
+
 
 /**
  * @brief Insere a maquina ordenada pelo na lista
@@ -42,36 +30,23 @@ Maquina *NovaMaquina(int proc, int tempo)
  * @param nova          inserção da nova maquina
  * @return      Inicio da nova Lista
  */
-Maquina *InserirMaquina(Maquina *inicio, Maquina *nova)
+Maquina *InserirMaquina(Maquina *lst, int proc, int tempo)
 {
-    if (ExisteMaquina(inicio, nova->proc))
-        return inicio;
+    if (!lst || strcmp(proc, lst->proc) < 0){
 
-    if (inicio == NULL)
-    {
-        inicio = nova;
+        Maquina *nova = (Maquina *) malloc(sizeof(Maquina));
+        assert(nova);
+        strcpy(nova->proc, proc);
+        nova->tempo = tempo;
+
+        nova->next = lst;
+        lst = nova;
     }
-    else
-    {
-        Maquina *aux = inicio;
-        Maquina *aux2 = NULL;
-        while (aux && aux->proc < nova->proc)
-        {
-            aux2 = aux;
-            aux = aux->next;
-        }
-        if (aux2 == NULL)
-        {
-            nova->next = inicio;
-            inicio = nova;
-        }
-        else
-        {
-            aux2->next = nova;
-            nova->next = aux;
-        }
+    else{
+        lst->next = InserirMaquina(lst->next, proc, tempo);
     }
-    return inicio;
+
+    return lst;
 }
 
 /**
@@ -167,25 +142,42 @@ Maquina *LerMaquina(const char *nomeFicheiro)
     while (!feof(stdin))
     {
         char string[1000];
-        char processo[1000];
-        float tempo;
+        int op;
+        int proc;
+        int tempo;
         fgets(string, 1000, stdin);
-        sscanf(string, "%s,%f", processo, &tempo);
+        sscanf(string, "%d,%d,%d", &op, &proc, &tempo);
         if (!feof(stdin))
         {
-            if (strlen(processo) > 99)
+            if (strlen(proc) > 99)
             {
-                printf("IGNORED>>%s>>%.4f\n", string, tempo);
+                printf("IGNORED>>%s\n", string);
             }
             else
             {
-                inicio = NovaMaquina(inicio, processo);
+                inicio = InserirMaquina(inicio, proc, tempo);
             }
         }
     }
 }
 
-Maquina *EscreverMaquina(){}
+/**
+ * @brief Abre um ficheiro txt vazio e escreve a lista criada
+ * 
+ */
+void EscreverMaquina(Operacao *lst){
+    FILE *fp;
+    fp = fopen("proccess_plan.txt", "w+");
+
+    for (; lst; lst=lst->first){
+        Maquina *maquina = lst->next;
+        for (; maquina;){
+            fprintf(fp, "\n%d,%d,%d", lst->op, maquina->proc, maquina->tempo);
+            maquina = maquina->next;
+        }
+    }
+    fclose(fp);
+}
 
 Maquina *MinimaQuantidade(){}
 
