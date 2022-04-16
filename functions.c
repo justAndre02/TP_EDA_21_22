@@ -22,7 +22,7 @@
 /**
  * @brief Cria uma nova Maquina
  *
- * @param proc      novo processo
+ * @param proc      nova operação
  * @param tempo     novo tempo
  * @return Maquina*
  */
@@ -78,7 +78,7 @@ Maquina *InserirMaquina(Maquina *inicio, Maquina *nova)
  * @brief Verifica se uma maquina existe
  *
  * @param inicio        inicio da lista
- * @param proc          id da maquina a procurar
+ * @param proc          id da operação a procurar
  * @return true
  * @return false
  */
@@ -100,7 +100,7 @@ bool ExisteMaquina(Maquina *inicio, int proc)
  * @brief Encontra uma maquina e devolve o seu endereço
  *
  * @param inicio        inicio da lista
- * @param proc          id da maquina a encontrar
+ * @param proc          id da operação a encontrar
  * @return Endereço da maquina
  */
 Maquina *ProcuraMaquina(Maquina *inicio, int proc)
@@ -123,9 +123,40 @@ Maquina *ProcuraMaquina(Maquina *inicio, int proc)
 }
 
 /**
+ * @brief Remove um elemento da lista ordenada dada qualquer posição
+ * 
+ * @param inicio    inicio da lista
+ * @param proc      id da operação a remover
+ * @return next
+ * @return original 
+ */
+Maquina *RemoveMaquina(Maquina* inicio, int proc){
+    if (inicio == NULL) return NULL;
+    if (strcmp(inicio->proc, proc) == 0) {
+        Maquina* next = inicio -> next;
+        free(inicio -> proc);
+        free(inicio);
+        return next;
+    }
+
+    Maquina *original = inicio;
+    while (inicio->next && strcmp(inicio->next->proc, proc) != 0) {
+        inicio = inicio->next;
+    }
+    if (inicio->next) {
+        Maquina *next = inicio->next->next;
+        free(inicio->next->proc);
+        free(inicio->next);
+        inicio->next = next;
+    }
+
+    return original;
+}
+
+/**
  * @brief Lê um ficheiro de texto linha a linha
  * 
- * @param nomeFicheiro          Identificação do ficheiro a ler
+ * @param nomeFicheiro      Identificação do ficheiro a ler
  * @return Conteúdo do ficheiro de texto 
  */
 Maquina *LerMaquina(const char *nomeFicheiro)
@@ -153,3 +184,11 @@ Maquina *LerMaquina(const char *nomeFicheiro)
         }
     }
 }
+
+Maquina *EscreverMaquina(){}
+
+Maquina *MinimaQuantidade(){}
+
+Maquina *MaximaQuantidade(){}
+
+Maquina *MediaQuantidade(){}
