@@ -43,3 +43,5 @@ Maquina *ProcuraMaquina(Maquina *inicio, int proc);
 Maquina *LerMaquina(const char *nomeFicheiro);
 Maquina *RemoveMaquina(Maquina* inicio, int proc);
 void EscreverMaquina(Operacao *lst);
+Maquina *MaiorTempo(Maquina *inicio);
+Maquina *MenorTempo(Maquina *inicio);

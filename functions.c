@@ -22,15 +22,14 @@
 #include "functions.h"
 
 
-
 /**
- * @brief Insere a maquina ordenada pelo na lista
+ * @brief               Insere a maquina ordenada pelo na lista
  *
  * @param inicio        inicio da lista
  * @param nova          inserção da nova maquina
- * @return      Inicio da nova Lista
+ * @return              Inicio da nova Lista
  */
-Maquina *InserirMaquina(Maquina *lst, int proc, int tempo)
+Maquina *InserirMaquina(Maquina *inicio, int proc, int tempo)
 {
     if (!lst || strcmp(proc, lst->proc) < 0){
 
@@ -39,18 +38,18 @@ Maquina *InserirMaquina(Maquina *lst, int proc, int tempo)
         strcpy(nova->proc, proc);
         nova->tempo = tempo;
 
-        nova->next = lst;
-        lst = nova;
+        nova->next = inicio;
+        inicio = nova;
     }
     else{
-        lst->next = InserirMaquina(lst->next, proc, tempo);
+        inicio->next = InserirMaquina(inicio->next, proc, tempo);
     }
 
-    return lst;
+    return inicio;
 }
 
 /**
- * @brief Verifica se uma maquina existe
+ * @brief               Verifica se uma maquina existe
  *
  * @param inicio        inicio da lista
  * @param proc          id da operação a procurar
@@ -72,11 +71,11 @@ bool ExisteMaquina(Maquina *inicio, int proc)
 }
 
 /**
- * @brief Encontra uma maquina e devolve o seu endereço
+ * @brief               Encontra uma maquina e devolve o seu endereço
  *
  * @param inicio        inicio da lista
  * @param proc          id da operação a encontrar
- * @return Endereço da maquina
+ * @return              Endereço da maquina
  */
 Maquina *ProcuraMaquina(Maquina *inicio, int proc)
 {
@@ -98,7 +97,7 @@ Maquina *ProcuraMaquina(Maquina *inicio, int proc)
 }
 
 /**
- * @brief Remove um elemento da lista ordenada dada qualquer posição
+ * @brief           Remove um elemento da lista ordenada dada qualquer posição
  * 
  * @param inicio    inicio da lista
  * @param proc      id da operação a remover
@@ -129,10 +128,10 @@ Maquina *RemoveMaquina(Maquina* inicio, int proc){
 }
 
 /**
- * @brief Lê um ficheiro de texto linha a linha
+ * @brief                 Lê um ficheiro de texto linha a linha
  * 
- * @param nomeFicheiro      Identificação do ficheiro a ler
- * @return Conteúdo do ficheiro de texto 
+ * @param nomeFicheiro    Identificação do ficheiro a ler
+ * @return                Conteúdo do ficheiro de texto 
  */
 Maquina *LerMaquina(const char *nomeFicheiro)
 {
@@ -179,8 +178,45 @@ void EscreverMaquina(Operacao *lst){
     fclose(fp);
 }
 
-Maquina *MinimaQuantidade(){}
+/**
+ * @brief           Determina o maior tempo de uma lista e retorna-o
+ * 
+ * 
+ * @param inicio    Inicio de uma lista
+ * @param maior     Maior tempo a ser determinado
+ * @return          A maior quantidade de tempo 
+ */
+Maquina *MaiorTempo(Maquina *inicio){
+    Maquina *maior = inicio;
+    if (inicio) {
+        while (inicio->next){
+            inicio = inicio->next;
+            if (inicio-> tempo > maior->tempo){
+                maior = inicio;
+            }
+        }
+    }
+    return maior;
+}
 
-Maquina *MaximaQuantidade(){}
+/**
+ * @brief           Determina o menor tempo de uma lista e retorna-o
+ * 
+ * @param inicio    Inicio de uma lista
+ * @param menor     Menor tempo a ser determinado
+ * @return          A menor quantidade de tempo 
+ */
+Maquina *MenorTempo(Maquina *inicio){
+    Maquina *menor = inicio;
+    if (inicio){
+        while (inicio->next){
+            inicio = inicio->next;
+            if (inicio -> tempo < menor->tempo){
+                menor = inicio;
+            }
+        }
+    }
+    return menor;
+}
 
 Maquina *MediaQuantidade(){}

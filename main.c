@@ -19,7 +19,9 @@
 int main()
 {
     Maquina *inicio;
+    Operacao* nova;
     inicio = NULL;
+    nova = NULL;
 
-    inicio = InserirMaquina(inicio, 1, 4);
+    
 }
