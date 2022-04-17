@@ -3,7 +3,7 @@
  * @author André (a21112@alunos.ipca.pt)
  * @brief Criação de listas
  * @version 0.1
- * @date 2022-03-25
+ * @date 2022-04-18
  *
  *  Funções de mainpulação de Listas Ligadas
  *
@@ -31,7 +31,7 @@
  */
 Maquina *InserirMaquina(Maquina *inicio, int proc, int tempo)
 {
-    if (!lst || strcmp(proc, lst->proc) < 0){
+    if (!inicio || strcmp(proc, inicio->proc) < 0){
 
         Maquina *nova = (Maquina *) malloc(sizeof(Maquina));
         assert(nova);
@@ -181,7 +181,6 @@ void EscreverMaquina(Operacao *lst){
 /**
  * @brief           Determina o maior tempo de uma lista e retorna-o
  * 
- * 
  * @param inicio    Inicio de uma lista
  * @param maior     Maior tempo a ser determinado
  * @return          A maior quantidade de tempo 
@@ -219,4 +218,31 @@ Maquina *MenorTempo(Maquina *inicio){
     return menor;
 }
 
-Maquina *MediaQuantidade(){}
+/**
+ * @brief           Percorre a lista e calcula a média de tempo através de um somatório e um contador
+ * 
+ * @param inicio    Inicio da lista  
+ * @param cont      Contador do numero de elementos
+ * @param sum       Somatorio dos valores de tempo
+ * @param media     Variavel aonde é calculada a média dos tempos
+ * @return          Média das quantidades de tempo  
+ */
+float mediaQuantidade(Maquina *inicio){
+    if (!inicio) return -1;
+    int cont = 0;
+    int sum = 0;
+    float media = 0.0;
+
+    Maquina *atual = inicio;
+    if (inicio){
+        while (inicio->next){
+            cont++;
+            sum += atual->tempo;
+            atual = atual->next;
+        }   
+        
+        media = sum / cont;
+    }
+    
+    return media;
+}

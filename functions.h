@@ -3,9 +3,10 @@
  * @author André (a21112@alunos.ipca.pt)
  * @brief Lista Ligadas Simples
  * @version 0.1
- * @date 2022-03-28
+ * @date 2022-04-18
  *
  * Estruturas que vão ser usadas no projeto
+ * 
  * Ficheiro baseado no repositório do professor
  * @see https://github.com/luferIPCA/LESI-EDA-2122/tree/master/Aulas/GereMaquinas
  * @copyright Copyright (c) 2022
@@ -45,3 +46,4 @@ Maquina *RemoveMaquina(Maquina* inicio, int proc);
 void EscreverMaquina(Operacao *lst);
 Maquina *MaiorTempo(Maquina *inicio);
 Maquina *MenorTempo(Maquina *inicio);
+float mediaQuantidade(Maquina *inicio);
