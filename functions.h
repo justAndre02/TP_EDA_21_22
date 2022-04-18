@@ -27,23 +27,20 @@
 typedef struct Maquina
 {
     int proc;
+    int op;
     int tempo;
     struct Maquina *next, *prev;
 } Maquina;
 
-typedef struct Operacao{
-    int op;
-    struct Maquina *next, *prev;
-    struct Maquina*first, *last;
-}Operacao;
 
-
-Maquina *InserirMaquina(Maquina *lst, int proc, int tempo);
+Maquina *InserirMaquina(Maquina *lst, int op, int proc, int tempo);
 bool ExisteMaquina(Maquina *inicio, int proc);
 Maquina *ProcuraMaquina(Maquina *inicio, int proc);
 Maquina *LerMaquina(const char *nomeFicheiro);
 Maquina *RemoveMaquina(Maquina* inicio, int proc);
-void EscreverMaquina(Operacao *lst);
+void EscreverMaquina(Maquina *lst);
 Maquina *MaiorTempo(Maquina *inicio);
 Maquina *MenorTempo(Maquina *inicio);
 float mediaQuantidade(Maquina *inicio);
+Maquina *AlteraMaquina(Maquina *inicio, int elemento, int index);
+void ListaMaquina(Maquina *inicio);

@@ -29,7 +29,7 @@
  * @param nova          inserção da nova maquina
  * @return              Inicio da nova Lista
  */
-Maquina *InserirMaquina(Maquina *inicio, int proc, int tempo)
+Maquina *InserirMaquina(Maquina *inicio, int op, int proc, int tempo)
 {
     if (!inicio || strcmp(proc, inicio->proc) < 0){
 
@@ -37,12 +37,13 @@ Maquina *InserirMaquina(Maquina *inicio, int proc, int tempo)
         assert(nova);
         strcpy(nova->proc, proc);
         nova->tempo = tempo;
+        nova->op = op;
 
         nova->next = inicio;
         inicio = nova;
     }
     else{
-        inicio->next = InserirMaquina(inicio->next, proc, tempo);
+        inicio->next = InserirMaquina(inicio->next, op, proc, tempo);
     }
 
     return inicio;
@@ -128,6 +129,25 @@ Maquina *RemoveMaquina(Maquina* inicio, int proc){
 }
 
 /**
+ * @brief Seleciona uma operação e altera o tempo dessa operação
+ * 
+ * @param elemento  Elemento da lista a ser modificado
+ * @param index     Index que percorre toda a lista
+ * @return          O novo tempo definido 
+ */
+Maquina *AlteraMaquina(Maquina *inicio, int elemento, int index){
+    Maquina *original = inicio;
+    for (int i = 0; i < index; i++){
+        if (!original->next) return NULL;
+
+        original = original->next;
+    }
+    original->tempo = elemento;
+
+    return original;
+}
+
+/**
  * @brief                 Lê um ficheiro de texto linha a linha
  * 
  * @param nomeFicheiro    Identificação do ficheiro a ler
@@ -154,7 +174,7 @@ Maquina *LerMaquina(const char *nomeFicheiro)
             }
             else
             {
-                inicio = InserirMaquina(inicio, proc, tempo);
+                inicio = InserirMaquina(inicio, op, proc, tempo);
             }
         }
     }
@@ -164,16 +184,13 @@ Maquina *LerMaquina(const char *nomeFicheiro)
  * @brief Abre um ficheiro txt vazio e escreve a lista criada
  * 
  */
-void EscreverMaquina(Operacao *lst){
+void EscreverMaquina(Maquina *lst){
     FILE *fp;
     fp = fopen("proccess_plan.txt", "w+");
 
-    for (; lst; lst=lst->first){
-        Maquina *maquina = lst->next;
-        for (; maquina;){
-            fprintf(fp, "\n%d,%d,%d", lst->op, maquina->proc, maquina->tempo);
-            maquina = maquina->next;
-        }
+    for (; lst; lst->next){
+        fprintf(fp, "\n%d,%d,%d", lst->op, lst->proc, lst->tempo);
+        lst=lst->next;
     }
     fclose(fp);
 }
@@ -245,4 +262,16 @@ float mediaQuantidade(Maquina *inicio){
     }
     
     return media;
+}
+
+/**
+ * @brief       Lista um Maquina criada anteriormente
+ * 
+ * @param inicio    Inicio da lista a ser apresentada
+ */
+void ListaMaquina(Maquina *inicio){
+    if (inicio){
+        printf("%d, %d ,%d", inicio->op, inicio->proc, inicio->tempo);
+        ListaMaquina(inicio->next);
+    }
 }
