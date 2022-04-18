@@ -68,10 +68,10 @@ Maquina *InserirMaquina(Maquina *inicio, Maquina *nova)
 }
 
 /**
- * @brief               Verifica se uma maquina existe
+ * @brief Verifica se uma maquina existe
  *
- * @param inicio        inicio da lista
- * @param proc          id da operação a procurar
+ * @param inicio inicio da lista
+ * @param proc id da operação a procurar
  * @return true
  * @return false
  */
@@ -90,11 +90,11 @@ bool ExisteMaquina(Maquina *inicio, int proc)
 }
 
 /**
- * @brief               Encontra uma maquina e devolve o seu endereço
+ * @brief Encontra uma maquina e devolve o seu endereço
  *
- * @param inicio        inicio da lista
- * @param proc          id da operação a encontrar
- * @return              Endereço da maquina
+ * @param inicio inicio da lista
+ * @param proc id da operação a encontrar
+ * @return Endereço da maquina
  */
 Maquina *ProcuraMaquina(Maquina *inicio, int proc)
 {
@@ -116,10 +116,10 @@ Maquina *ProcuraMaquina(Maquina *inicio, int proc)
 }
 
 /**
- * @brief           Remove um elemento da lista ordenada dada qualquer posição
+ * @brief Remove um elemento da lista ordenada dada qualquer posição
  * 
- * @param inicio    inicio da lista
- * @param proc      id da operação a remover
+ * @param inicio inicio da lista
+ * @param proc id da operação a remover
  * @return next
  * @return original 
  */
@@ -147,9 +147,9 @@ Maquina *RemoveMaquina(Maquina* inicio, int op){
 /**
  * @brief Seleciona uma operação e altera o tempo dessa operação
  * 
- * @param elemento  Elemento da lista a ser modificado
- * @param index     Index que percorre toda a lista
- * @return          O novo tempo definido 
+ * @param elemento Elemento da lista a ser modificado
+ * @param index Index que percorre toda a lista
+ * @return O novo tempo definido 
  */
 Maquina *AlteraMaquina(Maquina *inicio, int elemento, int index){
     Maquina *original = inicio;
@@ -169,10 +169,10 @@ Maquina *AlteraMaquina(Maquina *inicio, int elemento, int index){
 }
 
 /**
- * @brief                 Lê um ficheiro de texto linha a linha
+ * @brief Lê um ficheiro de texto linha a linha
  * 
- * @param nomeFicheiro    Identificação do ficheiro a ler
- * @return                Conteúdo do ficheiro de texto 
+ * @param nomeFicheiro Identificação do ficheiro a ler
+ * @return Conteúdo do ficheiro de texto 
  */
 Maquina *LerMaquina(const char *nomeFicheiro)
 {
@@ -215,11 +215,11 @@ void EscreverMaquina(Maquina *lst){
 }
 
 /**
- * @brief           Determina o maior tempo de uma lista e retorna-o
+ * @brief Determina o maior tempo de uma lista e retorna-o
  * 
- * @param inicio    Inicio de uma lista
- * @param maior     Maior tempo a ser determinado
- * @return          A maior quantidade de tempo 
+ * @param inicio Inicio de uma lista
+ * @param maior Maior tempo a ser determinado
+ * @return A maior quantidade de tempo 
  */
 Maquina *MaiorTempo(Maquina *inicio, int op){
     Maquina *maior = inicio;
@@ -235,11 +235,11 @@ Maquina *MaiorTempo(Maquina *inicio, int op){
 }
 
 /**
- * @brief           Faz a soma do tempo minimo de cada operação para determinar o menor tempo possível de um job
+ * @brief Faz a soma do tempo minimo de cada operação para determinar o menor tempo possível de um job
  * 
- * @param inicio    Inicio de uma lista
- * @param maior     Maior tempo a ser determinado
- * @return          A maior quantidade de tempo 
+ * @param inicio Inicio de uma lista
+ * @param maior Maior tempo a ser determinado
+ * @return A maior quantidade de tempo 
  */
 int SomaMaiorTempo(Maquina *inicio){
     int tempoMaximo = 0;
@@ -267,11 +267,11 @@ int SomaMaiorTempo(Maquina *inicio){
 }
 
 /**
- * @brief           Determina o menor tempo de uma lista e retorna-o
+ * @brief Determina o menor tempo de uma lista e retorna-o
  * 
- * @param inicio    Inicio de uma lista
- * @param menor     Menor tempo a ser determinado
- * @return          A menor quantidade de tempo 
+ * @param inicio Inicio de uma lista
+ * @param menor Menor tempo a ser determinado
+ * @return A menor quantidade de tempo 
  */
 Maquina *MenorTempo(Maquina *inicio, int op){
     Maquina *menor = inicio;
@@ -287,11 +287,11 @@ Maquina *MenorTempo(Maquina *inicio, int op){
 }
 
 /**
- * @brief               Faz a soma do tempo minimo de cada operação para determinar o menor tempo possível de um job
+ * @brief Faz a soma do tempo minimo de cada operação para determinar o menor tempo possível de um job
  * 
- * @param inicio        Inicio da lista a percorrer
- * @param tempoMinimo   Armazena o tempo minimo 
- * @param numOp         Representa o numero de operações a percorrer na lista 
+ * @param inicio Inicio da lista a percorrer
+ * @param tempoMinimo Armazena o tempo minimo 
+ * @param numOp Representa o numero de operações a percorrer na lista 
  * @return int 
  */
 int SomaMenorTempo(Maquina *inicio){
@@ -320,13 +320,13 @@ int SomaMenorTempo(Maquina *inicio){
 }
 
 /**
- * @brief           Percorre a lista e calcula a média de tempo através de um somatório e um contador
+ * @brief Percorre a lista e calcula a média de tempo através de um somatório e um contador
  * 
- * @param inicio    Inicio da lista  
- * @param cont      Contador do numero de elementos
- * @param sum       Somatorio dos valores de tempo
- * @param media     Variavel aonde é calculada a média dos tempos
- * @return          Média das quantidades de tempo  
+ * @param inicio Inicio da lista  
+ * @param cont Contador do numero de elementos
+ * @param sum Somatorio dos valores de tempo
+ * @param media Variavel aonde é calculada a média dos tempos
+ * @return Média das quantidades de tempo  
  */
 float mediaQuantidade(Maquina *inicio, int numeroOp){
     if (!inicio) return -1;
@@ -353,9 +353,9 @@ float mediaQuantidade(Maquina *inicio, int numeroOp){
 }
 
 /**
- * @brief       Lista uma Maquina criada anteriormente
+ * @brief Lista uma Maquina criada anteriormente
  * 
- * @param inicio    Inicio da lista a ser apresentada
+ * @param inicio Inicio da lista a ser apresentada
  */
 void ListaMaquina(Maquina *inicio){
     if (inicio){

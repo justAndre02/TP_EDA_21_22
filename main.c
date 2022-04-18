@@ -1,7 +1,7 @@
 /**
  * @file main.c
  * @author André (a21112@alunos.ipca.pt)
- * @brief
+ * @brief Menu responsável por chamar as funções criadas
  * @version 0.1
  * @date 2022-04-18
  * 

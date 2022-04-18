@@ -1,0 +1,126 @@
+\hypertarget{main_8c}{}\doxysection{main.\+c File Reference}
+\label{main_8c}\index{main.c@{main.c}}
+
+
+Menu responsável por chamar as funções criadas.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}functions.\+h\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{main_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Menu responsável por chamar as funções criadas. 
+
+\begin{DoxyAuthor}{Author}
+André (\href{mailto:a21112@alunos.ipca.pt}{\texttt{ a21112@alunos.\+ipca.\+pt}}) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2022-\/04-\/18
+\end{DoxyDate}
+Main que chama todas as funções criadas no ficheiro \char`\"{}functions.\+c\char`\"{}
+
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2022 
+\end{DoxyCopyright}
+
+
+Definition in file \mbox{\hyperlink{main_8c_source}{main.\+c}}.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{main_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{main_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}} 
+\index{main.c@{main.c}!main@{main}}
+\index{main@{main}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{main_8c_source_l00021}{21}} of file \mbox{\hyperlink{main_8c_source}{main.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00022 \{}
+\DoxyCodeLine{00023     \mbox{\hyperlink{structMaquina}{Maquina}} *lista = NULL;}
+\DoxyCodeLine{00024     \textcolor{keywordtype}{int} opc;}
+\DoxyCodeLine{00025     \textcolor{keywordtype}{int} numeroOp;}
+\DoxyCodeLine{00026     \textcolor{keywordtype}{float} media = 0.0;}
+\DoxyCodeLine{00027 }
+\DoxyCodeLine{00028     \textcolor{keywordflow}{while} (\textcolor{keyword}{true})\{}
+\DoxyCodeLine{00029         printf(\textcolor{stringliteral}{"{}\(\backslash\)n-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/MENU-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/"{}});}
+\DoxyCodeLine{00030         printf(\textcolor{stringliteral}{"{}\(\backslash\)n1 -\/ INSERIR OPERACAO"{}});}
+\DoxyCodeLine{00031         printf(\textcolor{stringliteral}{"{}\(\backslash\)n2 -\/ REMOVER OPERACAO"{}});}
+\DoxyCodeLine{00032         printf(\textcolor{stringliteral}{"{}\(\backslash\)n3 -\/ ALTERAR OPERACAO"{}});}
+\DoxyCodeLine{00033         printf(\textcolor{stringliteral}{"{}\(\backslash\)n4 -\/ DETERMINAR A QUANTIDADE MINIMA"{}});}
+\DoxyCodeLine{00034         printf(\textcolor{stringliteral}{"{}\(\backslash\)n5 -\/ DETERMINAR A QUANTIDADE MAXIMA"{}});}
+\DoxyCodeLine{00035         printf(\textcolor{stringliteral}{"{}\(\backslash\)n6 -\/ DETERMINAR A QUANTIDADE MEDIA"{}});}
+\DoxyCodeLine{00036         printf(\textcolor{stringliteral}{"{}\(\backslash\)n7 -\/ LEITURA DE UMA MAQUINA"{}});}
+\DoxyCodeLine{00037         printf(\textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)nSELECIONE A SUA OPCAO: "{}});}
+\DoxyCodeLine{00038         scanf(\textcolor{stringliteral}{"{}\%d"{}}, \&opc);}
+\DoxyCodeLine{00039         \textcolor{keywordflow}{switch} (opc)}
+\DoxyCodeLine{00040         \{}
+\DoxyCodeLine{00041         \textcolor{keywordflow}{case} 1:}
+\DoxyCodeLine{00042             lista = \mbox{\hyperlink{functions_8c_abf72168b6c654f829306c1c43d708fc7}{InserirMaquina}}(lista, CriaMaquina(3,8,4));}
+\DoxyCodeLine{00043             lista = \mbox{\hyperlink{functions_8c_abf72168b6c654f829306c1c43d708fc7}{InserirMaquina}}(lista, CriaMaquina(1,1,4));}
+\DoxyCodeLine{00044             lista = \mbox{\hyperlink{functions_8c_abf72168b6c654f829306c1c43d708fc7}{InserirMaquina}}(lista, CriaMaquina(1,2,3));}
+\DoxyCodeLine{00045             lista = \mbox{\hyperlink{functions_8c_abf72168b6c654f829306c1c43d708fc7}{InserirMaquina}}(lista, CriaMaquina(1,3,4));}
+\DoxyCodeLine{00046             lista = \mbox{\hyperlink{functions_8c_abf72168b6c654f829306c1c43d708fc7}{InserirMaquina}}(lista, CriaMaquina(2,5,3));}
+\DoxyCodeLine{00047             lista = \mbox{\hyperlink{functions_8c_abf72168b6c654f829306c1c43d708fc7}{InserirMaquina}}(lista, CriaMaquina(2,7,5));}
+\DoxyCodeLine{00048             \mbox{\hyperlink{functions_8c_addf2e3ebd60b170e158b1cddaac36c3f}{EscreverMaquina}}(lista);}
+\DoxyCodeLine{00049             \mbox{\hyperlink{functions_8c_a87069b20a0bce42c43c75b5759d10317}{ListaMaquina}}(lista);}
+\DoxyCodeLine{00050             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00051     }
+\DoxyCodeLine{00052         \textcolor{keywordflow}{case} 2:}
+\DoxyCodeLine{00053             lista = \mbox{\hyperlink{functions_8c_a2f26495f71f191fbfe120597fc68b057}{RemoveMaquina}}(lista ,1);}
+\DoxyCodeLine{00054             \mbox{\hyperlink{functions_8c_a87069b20a0bce42c43c75b5759d10317}{ListaMaquina}}(lista);}
+\DoxyCodeLine{00055             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00056 }
+\DoxyCodeLine{00057         \textcolor{keywordflow}{case} 3:}
+\DoxyCodeLine{00058             lista = \mbox{\hyperlink{functions_8c_a454cf21b0681eec3f612e5d626cf88df}{AlteraMaquina}}(lista, 1, 1);}
+\DoxyCodeLine{00059             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00060 }
+\DoxyCodeLine{00061         \textcolor{keywordflow}{case} 4:}
+\DoxyCodeLine{00062             printf(\textcolor{stringliteral}{"{}\(\backslash\)nO tempo minimo para terminar o job e \%d segundos\(\backslash\)n"{}}, \mbox{\hyperlink{functions_8c_aed54d331899a4fcd30c449a867f24b77}{SomaMenorTempo}}(lista));}
+\DoxyCodeLine{00063             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00064 }
+\DoxyCodeLine{00065         \textcolor{keywordflow}{case} 5:}
+\DoxyCodeLine{00066             printf(\textcolor{stringliteral}{"{}\(\backslash\)nO tempo maximo para terminar o job e \%d segundos\(\backslash\)n"{}}, \mbox{\hyperlink{functions_8c_a958230d5cca2c28f8ae0f134567e80e8}{SomaMaiorTempo}}(lista));}
+\DoxyCodeLine{00067             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00068 }
+\DoxyCodeLine{00069         \textcolor{keywordflow}{case} 6:}
+\DoxyCodeLine{00070             printf(\textcolor{stringliteral}{"{}Escolha a operacao: "{}});}
+\DoxyCodeLine{00071             scanf(\textcolor{stringliteral}{"{}\%d"{}}, \&opc);}
+\DoxyCodeLine{00072             media = \mbox{\hyperlink{functions_8c_abd71741f782045c9f3ac2f88659f839f}{mediaQuantidade}}(lista, opc);}
+\DoxyCodeLine{00073             printf(\textcolor{stringliteral}{"{}A media desta operacao e \%f segundos\(\backslash\)n"{}}, media);}
+\DoxyCodeLine{00074             setbuf(stdin, NULL);}
+\DoxyCodeLine{00075             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00076 }
+\DoxyCodeLine{00077         \textcolor{keywordflow}{case} 7:}
+\DoxyCodeLine{00078             lista = \mbox{\hyperlink{functions_8c_ac532dce3a4cee721a3725f0e5fd563b0}{LerMaquina}}(\textcolor{stringliteral}{"{}plano\_de\_processos.txt"{}});}
+\DoxyCodeLine{00079             \mbox{\hyperlink{functions_8c_a87069b20a0bce42c43c75b5759d10317}{ListaMaquina}}(lista);}
+\DoxyCodeLine{00080             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00081 }
+\DoxyCodeLine{00082         \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00083             system(\textcolor{stringliteral}{"{}pause"{}});}
+\DoxyCodeLine{00084 }
+\DoxyCodeLine{00085             exit(0);}
+\DoxyCodeLine{00086 }
+\DoxyCodeLine{00087             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00088         \}}
+\DoxyCodeLine{00089     \}}
+\DoxyCodeLine{00090 \}}
+
+\end{DoxyCode}

@@ -1,0 +1,36 @@
+\hypertarget{functions_8h_source}{}\doxysection{functions.\+h}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{functions_8h_source_l00001}00001 }
+\DoxyCodeLine{\Hypertarget{functions_8h_source_l00016}00016 \textcolor{preprocessor}{\#include <string.h>}}
+\DoxyCodeLine{\Hypertarget{functions_8h_source_l00017}00017 \textcolor{preprocessor}{\#include <stdio.h>}}
+\DoxyCodeLine{\Hypertarget{functions_8h_source_l00018}00018 \textcolor{preprocessor}{\#include <stdbool.h>}}
+\DoxyCodeLine{\Hypertarget{functions_8h_source_l00019}00019 \textcolor{preprocessor}{\#include <assert.h>}}
+\DoxyCodeLine{\Hypertarget{functions_8h_source_l00020}00020 }
+\DoxyCodeLine{\Hypertarget{functions_8h_source_l00021}00021 \textcolor{preprocessor}{\#define MAX 100}}
+\DoxyCodeLine{\Hypertarget{functions_8h_source_l00022}00022 \textcolor{preprocessor}{\#define M 40}}
+\DoxyCodeLine{\Hypertarget{functions_8h_source_l00023}00023 }
+\DoxyCodeLine{\Hypertarget{functions_8h_source_l00029}\mbox{\hyperlink{structMaquina}{00029}} \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\mbox{\hyperlink{structMaquina}{Maquina}}}
+\DoxyCodeLine{\Hypertarget{functions_8h_source_l00030}00030 \{}
+\DoxyCodeLine{\Hypertarget{functions_8h_source_l00031}00031     \textcolor{keywordtype}{int} proc;}
+\DoxyCodeLine{\Hypertarget{functions_8h_source_l00032}00032     \textcolor{keywordtype}{int} op;}
+\DoxyCodeLine{\Hypertarget{functions_8h_source_l00033}00033     \textcolor{keywordtype}{int} tempo;}
+\DoxyCodeLine{\Hypertarget{functions_8h_source_l00034}00034     \textcolor{keyword}{struct }\mbox{\hyperlink{structMaquina}{Maquina}} *next, *prev;}
+\DoxyCodeLine{\Hypertarget{functions_8h_source_l00035}00035 \} \mbox{\hyperlink{structMaquina}{Maquina}};}
+\DoxyCodeLine{\Hypertarget{functions_8h_source_l00036}00036 }
+\DoxyCodeLine{\Hypertarget{functions_8h_source_l00037}00037 \mbox{\hyperlink{structMaquina}{Maquina}} *CriaMaquina(\textcolor{keywordtype}{int} novoOp, \textcolor{keywordtype}{int} novoProc, \textcolor{keywordtype}{int} novoTempo);}
+\DoxyCodeLine{\Hypertarget{functions_8h_source_l00038}00038 \mbox{\hyperlink{structMaquina}{Maquina}} *\mbox{\hyperlink{functions_8c_abf72168b6c654f829306c1c43d708fc7}{InserirMaquina}}(\mbox{\hyperlink{structMaquina}{Maquina}} *inicio, \mbox{\hyperlink{structMaquina}{Maquina}} *nova);}
+\DoxyCodeLine{\Hypertarget{functions_8h_source_l00039}00039 \textcolor{keywordtype}{bool} \mbox{\hyperlink{functions_8c_a0ad3c936e6ecd241bbe6a9cf3d91cce5}{ExisteMaquina}}(\mbox{\hyperlink{structMaquina}{Maquina}} *inicio, \textcolor{keywordtype}{int} proc);}
+\DoxyCodeLine{\Hypertarget{functions_8h_source_l00040}00040 \mbox{\hyperlink{structMaquina}{Maquina}} *\mbox{\hyperlink{functions_8c_aba5acf7e11c810322fde11f292a6b84e}{ProcuraMaquina}}(\mbox{\hyperlink{structMaquina}{Maquina}} *inicio, \textcolor{keywordtype}{int} proc);}
+\DoxyCodeLine{\Hypertarget{functions_8h_source_l00041}00041 \mbox{\hyperlink{structMaquina}{Maquina}} *\mbox{\hyperlink{functions_8c_ac532dce3a4cee721a3725f0e5fd563b0}{LerMaquina}}(\textcolor{keyword}{const} \textcolor{keywordtype}{char} *nomeFicheiro);}
+\DoxyCodeLine{\Hypertarget{functions_8h_source_l00042}00042 \mbox{\hyperlink{structMaquina}{Maquina}} *\mbox{\hyperlink{functions_8c_a2f26495f71f191fbfe120597fc68b057}{RemoveMaquina}}(\mbox{\hyperlink{structMaquina}{Maquina}}* inicio, \textcolor{keywordtype}{int} proc);}
+\DoxyCodeLine{\Hypertarget{functions_8h_source_l00043}00043 \textcolor{keywordtype}{void} \mbox{\hyperlink{functions_8c_addf2e3ebd60b170e158b1cddaac36c3f}{EscreverMaquina}}(\mbox{\hyperlink{structMaquina}{Maquina}} *lst);}
+\DoxyCodeLine{\Hypertarget{functions_8h_source_l00044}00044 \mbox{\hyperlink{structMaquina}{Maquina}} *\mbox{\hyperlink{functions_8c_a5fa06b2b270a35f602f9d40671c56d4e}{MaiorTempo}}(\mbox{\hyperlink{structMaquina}{Maquina}} *inicio, \textcolor{keywordtype}{int} op);}
+\DoxyCodeLine{\Hypertarget{functions_8h_source_l00045}00045 \mbox{\hyperlink{structMaquina}{Maquina}} *\mbox{\hyperlink{functions_8c_aeb38739b6531484ec4a897bde28ecfa4}{MenorTempo}}(\mbox{\hyperlink{structMaquina}{Maquina}} *inicio, \textcolor{keywordtype}{int} op);}
+\DoxyCodeLine{\Hypertarget{functions_8h_source_l00046}00046 \textcolor{keywordtype}{float} \mbox{\hyperlink{functions_8c_abd71741f782045c9f3ac2f88659f839f}{mediaQuantidade}}(\mbox{\hyperlink{structMaquina}{Maquina}} *inicio, \textcolor{keywordtype}{int} numeroOp);}
+\DoxyCodeLine{\Hypertarget{functions_8h_source_l00047}00047 \mbox{\hyperlink{structMaquina}{Maquina}} *\mbox{\hyperlink{functions_8c_a454cf21b0681eec3f612e5d626cf88df}{AlteraMaquina}}(\mbox{\hyperlink{structMaquina}{Maquina}} *inicio, \textcolor{keywordtype}{int} elemento, \textcolor{keywordtype}{int} index);}
+\DoxyCodeLine{\Hypertarget{functions_8h_source_l00048}00048 \textcolor{keywordtype}{void} \mbox{\hyperlink{functions_8c_a87069b20a0bce42c43c75b5759d10317}{ListaMaquina}}(\mbox{\hyperlink{structMaquina}{Maquina}} *inicio);}
+\DoxyCodeLine{\Hypertarget{functions_8h_source_l00049}00049 \textcolor{keywordtype}{int} \mbox{\hyperlink{functions_8c_aed54d331899a4fcd30c449a867f24b77}{SomaMenorTempo}}(\mbox{\hyperlink{structMaquina}{Maquina}} *inicio);}
+\DoxyCodeLine{\Hypertarget{functions_8h_source_l00050}00050 \textcolor{keywordtype}{int} \mbox{\hyperlink{functions_8c_a958230d5cca2c28f8ae0f134567e80e8}{SomaMaiorTempo}}(\mbox{\hyperlink{structMaquina}{Maquina}} *inicio);}
+
+\end{DoxyCode}

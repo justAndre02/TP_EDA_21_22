@@ -8,6 +8,7 @@
  * Estruturas que vão ser usadas no projeto
  * 
  * Ficheiro baseado no repositório do professor
+ *
  * @see https://github.com/luferIPCA/LESI-EDA-2122/tree/master/Aulas/GereMaquinas
  * @copyright Copyright (c) 2022
  *
@@ -22,7 +23,8 @@
 
 /**
  * @brief Estrutura de dados da maquina
- *
+ * 
+ * @param proc 
  */
 typedef struct Maquina
 {
