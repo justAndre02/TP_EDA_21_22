@@ -22,58 +22,69 @@ int main()
 {
     Maquina *lista = NULL;
     int opc;
+    int numeroOp;
+    float media = 0.0;
 
-    printf("----------------------MENU----------------------");
-    printf("\n1 - INSERIR UMA MAQUINA");
-    printf("\n2 - REMOVER UMA MAQUINA");
-    printf("\n3 - ALTERAR UMA MAQUINA");
-    printf("\n4 - DETERMINAR A QUANTIDADE MINIMA");
-    printf("\n5 - DETERMINAR A QUANTIDADE MAXIMA");
-    printf("\n6 - DETERMINAR A QUANTIDADE MEDIA");
-    printf("\n7 - LEITURA DE UMA MAQUINA");
-    printf("\n\nSELECIONE A SUA OPCAO: ");
-    scanf("%d", &opc);
-    switch (opc)
-    {
-    case 1:
-        printf("teste");
-        lista = InserirMaquina(lista, 1, 1, 1);
-        lista = InserirMaquina(lista, 1, 2, 4);
-        lista = InserirMaquina(lista, 1, 3, 3);
-        ListaMaquina(lista);
-        printf("teste");
-        break;
+    while (true){
+        printf("\n----------------------MENU----------------------");
+        printf("\n1 - INSERIR OPERACAO");
+        printf("\n2 - REMOVER OPERACAO");
+        printf("\n3 - ALTERAR OPERACAO");
+        printf("\n4 - DETERMINAR A QUANTIDADE MINIMA");
+        printf("\n5 - DETERMINAR A QUANTIDADE MAXIMA");
+        printf("\n6 - DETERMINAR A QUANTIDADE MEDIA");
+        printf("\n7 - LEITURA DE UMA MAQUINA");
+        printf("\n\nSELECIONE A SUA OPCAO: ");
+        scanf("%d", &opc);
+        switch (opc)
+        {
+        case 1:
+            lista = InserirMaquina(lista, CriaMaquina(3,8,4));
+            lista = InserirMaquina(lista, CriaMaquina(1,1,4));
+            lista = InserirMaquina(lista, CriaMaquina(1,2,3));
+            lista = InserirMaquina(lista, CriaMaquina(1,3,4));
+            lista = InserirMaquina(lista, CriaMaquina(2,5,3));
+            lista = InserirMaquina(lista, CriaMaquina(2,7,5));
+            EscreverMaquina(lista);
+            ListaMaquina(lista);
+            break;
     
-    case 2:
-        lista = RemoveMaquina(lista , 1);
-        ListaMaquina(lista);
-        break;
+        case 2:
+            lista = RemoveMaquina(lista ,1);
+            ListaMaquina(lista);
+            break;
 
-    case 3:
-        printf("\nteste");
-        break;
+        case 3:
+            lista = AlteraMaquina(lista, 1, 1);
+            break;
 
-    case 4:
-        printf("\nteste");
-        break;
+        case 4:
+            printf("\nO tempo minimo para terminar o job e %d segundos\n", SomaMenorTempo(lista));
+            break;
 
-    case 5:
-        printf("\nteste");
-        break;
+        case 5:
+            printf("\nO tempo maximo para terminar o job e %d segundos\n", SomaMaiorTempo(lista));
+            break;
 
-    case 6:
-        printf("\nteste");
-        break;
+        case 6:
+            printf("Escolha a operacao: ");
+            scanf("%d", &opc);
+            media = mediaQuantidade(lista, opc);
+            printf("A media desta operacao e %f segundos\n", media);
+            setbuf(stdin, NULL);
+            break;
 
-    case 7:
-        printf("\nteste");
-        break;
+        case 7:
+            lista = LerMaquina("plano_de_processos.txt");
+            ListaMaquina(lista);
+            break;
 
-    default:
-        system("pause");
+        default:
+            system("pause");
 
-        exit(0);
+            exit(0);
 
-        break;
+            break;
+        }
     }
 }

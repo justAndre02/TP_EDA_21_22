@@ -22,6 +22,15 @@
 #include "functions.h"
 
 
+Maquina *CriaMaquina(int novoOp, int novoProc, int novoTempo){
+    Maquina *nova = malloc(sizeof(Maquina));
+    nova->op = novoOp;
+    nova->proc = novoProc;
+    nova->tempo = novoTempo;
+    nova->next = NULL;
+    return nova;
+}
+
 /**
  * @brief               Insere a maquina ordenada pelo na lista
  *
@@ -29,24 +38,33 @@
  * @param nova          inserção da nova maquina
  * @return              Inicio da nova Lista
  */
-Maquina *InserirMaquina(Maquina *inicio, int op, int proc, int tempo)
+Maquina *InserirMaquina(Maquina *inicio, Maquina *nova)
 {
-    if (!inicio || strcmp(proc, inicio->proc) < 0){
+    if (nova == NULL)	return inicio;	
 
-        Maquina *nova = (Maquina *) malloc(sizeof(Maquina));
-        assert(nova);
-        strcpy(nova->proc, proc);
-        nova->tempo = tempo;
-        nova->op = op;
-
-        nova->next = inicio;
-        inicio = nova;
-    }
-    else{
-        inicio->next = InserirMaquina(inicio->next, op, proc, tempo);
-    }
-
-    return inicio;
+	if (inicio == NULL) {	
+		inicio = nova;
+		return (inicio);
+	}
+	else {		
+		Maquina* aux = inicio;
+		Maquina* antAux = aux;
+		while (aux != NULL && aux->op < nova->op) {
+			antAux = aux;
+			aux = aux->next;
+		}
+		if (aux == inicio) {		
+			nova->next = inicio;
+			inicio = nova;
+			return inicio;
+		}
+		if (aux != NULL)	
+		{
+			nova->next = aux;
+			antAux->next = nova;
+		}
+	}
+	return inicio;
 }
 
 /**
@@ -105,22 +123,20 @@ Maquina *ProcuraMaquina(Maquina *inicio, int proc)
  * @return next
  * @return original 
  */
-Maquina *RemoveMaquina(Maquina* inicio, int proc){
+Maquina *RemoveMaquina(Maquina* inicio, int op){
     if (inicio == NULL) return NULL;
-    if (strcmp(inicio->proc, proc) == 0) {
+    if (inicio->op == op) {
         Maquina* next = inicio -> next;
-        free(inicio -> proc);
         free(inicio);
         return next;
     }
 
     Maquina *original = inicio;
-    while (inicio->next && strcmp(inicio->next->proc, proc) != 0) {
+    while (inicio->next && inicio->next->op == op) {
         inicio = inicio->next;
     }
     if (inicio->next) {
         Maquina *next = inicio->next->next;
-        free(inicio->next->proc);
         free(inicio->next);
         inicio->next = next;
     }
@@ -142,7 +158,12 @@ Maquina *AlteraMaquina(Maquina *inicio, int elemento, int index){
 
         original = original->next;
     }
+
+    printf("\nA operacao original: %d, %d ,%d", original->op, original->proc, original->tempo);
+
     original->tempo = elemento;
+
+    printf("\nA operacao apos a sua alteracao: %d, %d ,%d\n\n", original->op, original->proc, original->tempo);
 
     return original;
 }
@@ -156,29 +177,26 @@ Maquina *AlteraMaquina(Maquina *inicio, int elemento, int index){
 Maquina *LerMaquina(const char *nomeFicheiro)
 {
     FILE *fp;
+    fp = fopen(nomeFicheiro, "r+");
     Maquina *inicio = NULL;
 
-    while (!feof(stdin))
-    {
-        char string[1000];
+    if(fp == NULL){
+        perror("Failed to open file");
+        exit(1);
+    } 
+
+    while (!feof(fp)){
         int op;
         int proc;
         int tempo;
-        fgets(string, 1000, stdin);
-        sscanf(string, "%d,%d,%d", &op, &proc, &tempo);
-        if (!feof(stdin))
-        {
-            if (strlen(proc) > 99)
-            {
-                printf("IGNORED>>%s\n", string);
-            }
-            else
-            {
-                inicio = InserirMaquina(inicio, op, proc, tempo);
-            }
-        }
+        fscanf(fp, "%d,%d,%d\n", &op, &proc, &tempo);
+        if (!feof(fp)){
+            inicio = InserirMaquina(inicio, CriaMaquina(op, proc, tempo));
+        } 
     }
+    return inicio;
 }
+
 
 /**
  * @brief Abre um ficheiro txt vazio e escreve a lista criada
@@ -186,10 +204,11 @@ Maquina *LerMaquina(const char *nomeFicheiro)
  */
 void EscreverMaquina(Maquina *lst){
     FILE *fp;
-    fp = fopen("proccess_plan.txt", "w+");
+    fp = fopen("plano_de_processos.txt", "w+");
 
     for (; lst; lst->next){
-        fprintf(fp, "\n%d,%d,%d", lst->op, lst->proc, lst->tempo);
+        fprintf(fp, "%d,%d,%d", lst->op, lst->proc, lst->tempo);
+        fprintf(fp,"\n");
         lst=lst->next;
     }
     fclose(fp);
@@ -202,17 +221,49 @@ void EscreverMaquina(Maquina *lst){
  * @param maior     Maior tempo a ser determinado
  * @return          A maior quantidade de tempo 
  */
-Maquina *MaiorTempo(Maquina *inicio){
+Maquina *MaiorTempo(Maquina *inicio, int op){
     Maquina *maior = inicio;
-    if (inicio) {
-        while (inicio->next){
-            inicio = inicio->next;
-            if (inicio-> tempo > maior->tempo){
-                maior = inicio;
-            }
+    while(inicio && op <= inicio->op){
+        if(inicio -> tempo > maior->tempo){
+            maior = inicio;
+        }
+
+        inicio = inicio->next;
+    }
+
+    return maior;
+}
+
+/**
+ * @brief           Faz a soma do tempo minimo de cada operação para determinar o menor tempo possível de um job
+ * 
+ * @param inicio    Inicio de uma lista
+ * @param maior     Maior tempo a ser determinado
+ * @return          A maior quantidade de tempo 
+ */
+int SomaMaiorTempo(Maquina *inicio){
+    int tempoMaximo = 0;
+    int numOp = 0;
+
+    Maquina *original = inicio;
+    Maquina *maximo;
+    Maquina *atual = inicio;
+
+    while(atual->next != NULL){
+        atual = atual -> next;
+    }
+
+    numOp = atual->op;
+
+    for(int i = 1; i <= numOp; i++){
+        maximo = MaiorTempo(original, i);
+        if (maximo != NULL){
+            tempoMaximo += maximo->tempo;
+            printf("\nA operacao %d, demora %d segundos\n", i, maximo->tempo);
         }
     }
-    return maior;
+
+    return tempoMaximo;
 }
 
 /**
@@ -222,17 +273,50 @@ Maquina *MaiorTempo(Maquina *inicio){
  * @param menor     Menor tempo a ser determinado
  * @return          A menor quantidade de tempo 
  */
-Maquina *MenorTempo(Maquina *inicio){
+Maquina *MenorTempo(Maquina *inicio, int op){
     Maquina *menor = inicio;
-    if (inicio){
-        while (inicio->next){
-            inicio = inicio->next;
-            if (inicio -> tempo < menor->tempo){
-                menor = inicio;
-            }
+    while(inicio && op <= inicio->op){
+        if(inicio -> tempo < menor->tempo){
+            menor = inicio;
+        }
+
+        inicio = inicio->next;
+    }
+
+    return menor;
+}
+
+/**
+ * @brief               Faz a soma do tempo minimo de cada operação para determinar o menor tempo possível de um job
+ * 
+ * @param inicio        Inicio da lista a percorrer
+ * @param tempoMinimo   Armazena o tempo minimo 
+ * @param numOp         Representa o numero de operações a percorrer na lista 
+ * @return int 
+ */
+int SomaMenorTempo(Maquina *inicio){
+    int tempoMinimo = 0;
+    int numOp = 0;
+
+    Maquina *original = inicio;
+    Maquina *minimo;
+    Maquina *atual = inicio;
+
+    while(atual->next != NULL){
+        atual = atual -> next;
+    }
+
+    numOp = atual->op;
+
+    for(int i = 1; i <= numOp; i++){
+        minimo = MenorTempo(original, i);
+        if (minimo != NULL){
+            tempoMinimo += minimo->tempo;
+            printf("\nA operacao %d, demora %d segundos\n", i, minimo->tempo);
         }
     }
-    return menor;
+
+    return tempoMinimo;
 }
 
 /**
@@ -244,34 +328,38 @@ Maquina *MenorTempo(Maquina *inicio){
  * @param media     Variavel aonde é calculada a média dos tempos
  * @return          Média das quantidades de tempo  
  */
-float mediaQuantidade(Maquina *inicio){
+float mediaQuantidade(Maquina *inicio, int numeroOp){
     if (!inicio) return -1;
+
     int cont = 0;
     int sum = 0;
     float media = 0.0;
 
     Maquina *atual = inicio;
     if (inicio){
-        while (inicio->next){
-            cont++;
-            sum += atual->tempo;
+        while(atual && atual->op != numeroOp){
             atual = atual->next;
-        }   
-        
-        media = sum / cont;
+        }
+            while (atual && atual->op == numeroOp){
+                cont++;
+                sum += atual->tempo;
+                atual = atual->next;
+            }   
+            if (cont != 0){
+                media = (float)sum / cont;
+            }
     }
-    
     return media;
 }
 
 /**
- * @brief       Lista um Maquina criada anteriormente
+ * @brief       Lista uma Maquina criada anteriormente
  * 
  * @param inicio    Inicio da lista a ser apresentada
  */
 void ListaMaquina(Maquina *inicio){
     if (inicio){
-        printf("%d, %d ,%d", inicio->op, inicio->proc, inicio->tempo);
+        printf("%d, %d ,%d\n", inicio->op, inicio->proc, inicio->tempo);
         ListaMaquina(inicio->next);
     }
 }

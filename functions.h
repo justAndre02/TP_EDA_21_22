@@ -32,15 +32,17 @@ typedef struct Maquina
     struct Maquina *next, *prev;
 } Maquina;
 
-
-Maquina *InserirMaquina(Maquina *lst, int op, int proc, int tempo);
+Maquina *CriaMaquina(int novoOp, int novoProc, int novoTempo);
+Maquina *InserirMaquina(Maquina *inicio, Maquina *nova);
 bool ExisteMaquina(Maquina *inicio, int proc);
 Maquina *ProcuraMaquina(Maquina *inicio, int proc);
 Maquina *LerMaquina(const char *nomeFicheiro);
 Maquina *RemoveMaquina(Maquina* inicio, int proc);
 void EscreverMaquina(Maquina *lst);
-Maquina *MaiorTempo(Maquina *inicio);
-Maquina *MenorTempo(Maquina *inicio);
-float mediaQuantidade(Maquina *inicio);
+Maquina *MaiorTempo(Maquina *inicio, int op);
+Maquina *MenorTempo(Maquina *inicio, int op);
+float mediaQuantidade(Maquina *inicio, int numeroOp);
 Maquina *AlteraMaquina(Maquina *inicio, int elemento, int index);
 void ListaMaquina(Maquina *inicio);
+int SomaMenorTempo(Maquina *inicio);
+int SomaMaiorTempo(Maquina *inicio);
