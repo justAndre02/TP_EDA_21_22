@@ -4,7 +4,7 @@
  * @brief Menu responsável por chamar as funções criadas
  * @version 0.1
  * @date 2022-04-18
- * 
+ *
  * Main que chama todas as funções criadas no ficheiro "functions.c"
  *
  * @copyright Copyright (c) 2022
@@ -25,7 +25,8 @@ int main()
     int numeroOp;
     float media = 0.0;
 
-    while (true){
+    while (true)
+    {
         printf("\n----------------------MENU----------------------");
         printf("\n1 - INSERIR OPERACAO");
         printf("\n2 - REMOVER OPERACAO");
@@ -39,18 +40,19 @@ int main()
         switch (opc)
         {
         case 1:
-            lista = InserirMaquina(lista, CriaMaquina(3,8,4));
-            lista = InserirMaquina(lista, CriaMaquina(1,1,4));
-            lista = InserirMaquina(lista, CriaMaquina(1,2,3));
-            lista = InserirMaquina(lista, CriaMaquina(1,3,4));
-            lista = InserirMaquina(lista, CriaMaquina(2,5,3));
-            lista = InserirMaquina(lista, CriaMaquina(2,7,5));
+            lista = InserirMaquina(lista, CriaMaquina(3, 8, 4));
+            lista = InserirMaquina(lista, CriaMaquina(1, 1, 4));
+            lista = InserirMaquina(lista, CriaMaquina(1, 2, 3));
+            lista = InserirMaquina(lista, CriaMaquina(1, 3, 4));
+            lista = InserirMaquina(lista, CriaMaquina(2, 5, 3));
+            //lista = InserirMaquina(lista, CriaMaquina(1, 1, 5));
+            lista = InserirMaquina(lista, CriaMaquina(2, 7, 5));
             EscreverMaquina(lista);
             ListaMaquina(lista);
             break;
-    
+
         case 2:
-            lista = RemoveMaquina(lista ,1);
+            lista = RemoveMaquina(lista, 1);
             ListaMaquina(lista);
             break;
 
