@@ -24,7 +24,9 @@
 /**
  * @brief Estrutura de dados da maquina
  * 
- * @param proc 
+ * @param proc Maquina
+ * @param op Operação
+ * @param tempo Tempo 
  */
 typedef struct Maquina
 {
@@ -33,6 +35,17 @@ typedef struct Maquina
     int tempo;
     struct Maquina *next, *prev;
 } Maquina;
+
+/**
+ * @brief Estrutura de dados do job
+ * 
+ * @param job Job
+ */
+typedef struct Job{
+    int job;
+    struct Maquina *next, *prev;
+    struct Maquina *proc, *op, *tempo;
+} Job;
 
 Maquina *CriaMaquina(int novoOp, int novoProc, int novoTempo);
 Maquina *InserirMaquina(Maquina *inicio, Maquina *nova);

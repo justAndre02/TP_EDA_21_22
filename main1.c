@@ -1,7 +1,7 @@
 /**
- * @file main.c
+ * @file main1.c
  * @author André (a21112@alunos.ipca.pt)
- * @brief Menu responsável por chamar as funções criadas
+ * @brief Menu responsável por chamar as funções criadas da fase 1
  * @version 0.1
  * @date 2022-04-18
  *
@@ -28,14 +28,14 @@ int main()
     while (true)
     {
         printf("\n----------------------MENU----------------------");
-        printf("\n1 - INSERIR OPERACAO");
-        printf("\n2 - REMOVER OPERACAO");
-        printf("\n3 - ALTERAR OPERACAO");
-        printf("\n4 - DETERMINAR A QUANTIDADE MINIMA");
-        printf("\n5 - DETERMINAR A QUANTIDADE MAXIMA");
-        printf("\n6 - DETERMINAR A QUANTIDADE MEDIA");
+        printf("\n1 - INSERIR OPERAÇÃO");
+        printf("\n2 - REMOVER OPERAÇÃO");
+        printf("\n3 - ALTERAR OPERAÇÃO");
+        printf("\n4 - DETERMINAR A QUANTIDADE MÍNIMA");
+        printf("\n5 - DETERMINAR A QUANTIDADE MÁXIMA");
+        printf("\n6 - DETERMINAR A QUANTIDADE MÉDIA");
         printf("\n7 - LEITURA DE UMA MAQUINA");
-        printf("\n\nSELECIONE A SUA OPCAO: ");
+        printf("\n\nSELECIONE A SUA OPÇÃO: ");
         scanf("%d", &opc);
         switch (opc)
         {
@@ -45,7 +45,6 @@ int main()
             lista = InserirMaquina(lista, CriaMaquina(1, 2, 3));
             lista = InserirMaquina(lista, CriaMaquina(1, 3, 4));
             lista = InserirMaquina(lista, CriaMaquina(2, 5, 3));
-            //lista = InserirMaquina(lista, CriaMaquina(1, 1, 5));
             lista = InserirMaquina(lista, CriaMaquina(2, 7, 5));
             EscreverMaquina(lista);
             ListaMaquina(lista);
@@ -61,18 +60,18 @@ int main()
             break;
 
         case 4:
-            printf("\nO tempo minimo para terminar o job e %d segundos\n", SomaMenorTempo(lista));
+            printf("\nO tempo minimo para terminar o job é %d segundos\n", SomaMenorTempo(lista));
             break;
 
         case 5:
-            printf("\nO tempo maximo para terminar o job e %d segundos\n", SomaMaiorTempo(lista));
+            printf("\nO tempo maximo para terminar o job é %d segundos\n", SomaMaiorTempo(lista));
             break;
 
         case 6:
-            printf("Escolha a operacao: ");
+            printf("Escolha a operação: ");
             scanf("%d", &opc);
             media = mediaQuantidade(lista, opc);
-            printf("A media desta operacao e %f segundos\n", media);
+            printf("A media desta operação e %f segundos\n", media);
             setbuf(stdin, NULL);
             break;
 
