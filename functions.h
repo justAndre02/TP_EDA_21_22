@@ -19,7 +19,8 @@
 #include <assert.h>
 
 #define MAX 100
-#define M 40
+#define M 7
+#define T 100
 
 /**
  * @brief Estrutura de dados da maquina
@@ -43,8 +44,11 @@ typedef struct Maquina
  */
 typedef struct Job{
     int job;
-    struct Maquina *next, *prev;
-    struct Maquina *proc, *op, *tempo;
+    int proc;
+    int op;
+    int tempo;
+    struct Job *next, *prev;
+    struct Maquina *first, *last;
 } Job;
 
 Maquina *CriaMaquina(int novoOp, int novoProc, int novoTempo);
@@ -61,3 +65,10 @@ Maquina *AlteraMaquina(Maquina *inicio, int elemento, int index);
 void ListaMaquina(Maquina *inicio);
 int SomaMenorTempo(Maquina *inicio);
 int SomaMaiorTempo(Maquina *inicio);
+
+Job *CriaJob(int novoJob, int novoOp, int novoProc, int novoTempo);
+Job *InserirJob(Job *inicio, Job *nova);
+void EscreverJob(Job *lst);
+Job *LerJob(const char *nomeFicheiro);
+void ListaJob(Job *inicio);
+Job *RemoveJob(Job *inicio, int job);

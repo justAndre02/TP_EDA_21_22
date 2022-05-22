@@ -220,7 +220,7 @@ Maquina *LerMaquina(const char *nomeFicheiro)
 void EscreverMaquina(Maquina *lst)
 {
     FILE *fp;
-    fp = fopen("plano_de_processos.txt", "w+");
+    fp = fopen("plano_de_processos2.txt", "w+");
 
     for (; lst; lst->next)
     {

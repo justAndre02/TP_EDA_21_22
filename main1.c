@@ -15,8 +15,12 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <locale.h>
+#include <windows.h>
 
 #include "functions.h"
+
+
 
 int main()
 {
@@ -27,6 +31,7 @@ int main()
 
     while (true)
     {
+        SetConsoleOutputCP(65001);
         printf("\n----------------------MENU----------------------");
         printf("\n1 - INSERIR OPERAÇÃO");
         printf("\n2 - REMOVER OPERAÇÃO");
@@ -51,7 +56,7 @@ int main()
             break;
 
         case 2:
-            lista = RemoveMaquina(lista, 1);
+            lista = RemoveMaquina(lista,1);
             ListaMaquina(lista);
             break;
 
@@ -60,18 +65,18 @@ int main()
             break;
 
         case 4:
-            printf("\nO tempo minimo para terminar o job é %d segundos\n", SomaMenorTempo(lista));
+            printf("\nO tempo mínimo para terminar o job é %d segundos\n", SomaMenorTempo(lista));
             break;
 
         case 5:
-            printf("\nO tempo maximo para terminar o job é %d segundos\n", SomaMaiorTempo(lista));
+            printf("\nO tempo máximo para terminar o job é %d segundos\n", SomaMaiorTempo(lista));
             break;
 
         case 6:
             printf("Escolha a operação: ");
             scanf("%d", &opc);
             media = mediaQuantidade(lista, opc);
-            printf("A media desta operação e %f segundos\n", media);
+            printf("A media desta operação é %f segundos\n", media);
             setbuf(stdin, NULL);
             break;
 
