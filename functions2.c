@@ -33,7 +33,6 @@ Job *CriaJob(int novoJob, int novoOp, int novoProc, int novoTempo)
     return nova;
 }
 
-
 Job *InserirJob(Job *inicio, Job *nova)
 {
     if (nova == NULL)
@@ -99,7 +98,7 @@ Job *LerJob(const char *nomeFicheiro)
         int job;
         int proc;
         int tempo;
-        fscanf(fp, "%d,%d,%d,%d",&job, &op, &proc, &tempo);
+        fscanf(fp, "%d,%d,%d,%d", &job, &op, &proc, &tempo);
         if (!feof(fp))
         {
             inicio = InserirJob(inicio, CriaJob(job, op, proc, tempo));
