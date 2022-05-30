@@ -19,17 +19,14 @@
 #include <stdbool.h>
 #include <assert.h>
 
-#include "functions.h"
+#include "functions2.h"
 
-Job *CriaJob(int novoJob, int novoOp, int novoProc, int novoTempo)
+Job *CriaJob(int novoJob, int novoOp, int novoMaquina, int novoTempo)
 {
     Job *nova = malloc(sizeof(Job));
+
     nova->job = novoJob;
-    nova->op = novoOp;
-    nova->proc = novoProc;
-    nova->tempo = novoTempo;
-    nova->next = NULL;
-    nova->prev = NULL;
+    nova->ops = novoOp;
     return nova;
 }
 
@@ -65,27 +62,19 @@ Job *InserirJob(Job *inicio, Job *nova)
         }
     }
     return inicio;
-}
-
-void EscreverJob(Job *lst)
-{
-    FILE *fp;
-    fp = fopen("plano_de_processos2.txt", "w+");
-
-    for (; lst; lst->next)
-    {
-        fprintf(fp, "%d,%d,%d,%d\n", lst->job, lst->op, lst->proc, lst->tempo);
-        lst = lst->next;
-    }
-    fclose(fp);
-}
+} 
 
 Job *LerJob(const char *nomeFicheiro)
 {
     FILE *fp;
-    fp = fopen(nomeFicheiro, "r+");
+    char texto[MAX];
+    
     Job *inicio = NULL;
+    Job auxjob;
+    Maquina auxop;
+    Maquina auxmaq;
 
+    fp = fopen(nomeFicheiro, "r+");
     if (fp == NULL)
     {
         perror("Failed to open file");
@@ -94,50 +83,10 @@ Job *LerJob(const char *nomeFicheiro)
 
     while (!feof(fp))
     {
-        int op;
-        int job;
-        int proc;
-        int tempo;
-        fscanf(fp, "%d,%d,%d,%d", &job, &op, &proc, &tempo);
-        if (!feof(fp))
-        {
-            inicio = InserirJob(inicio, CriaJob(job, op, proc, tempo));
-        }
+        sscanf(texto, "%d,%d,%d,%d", &auxjob.job, &auxop.op, &auxmaq.maquina, &auxmaq.tempo);
     }
+
+    fclose(fp);
     return inicio;
 }
 
-void ListaJob(Job *inicio)
-{
-    if (inicio)
-    {
-        printf("%d, %d, %d ,%d\n", inicio->job, inicio->op, inicio->proc, inicio->tempo);
-        ListaJob(inicio->next);
-    }
-}
-
-Job *RemoveJob(Job *inicio, int job)
-{
-    if (inicio == NULL)
-        return NULL;
-
-    if (inicio->job == job)
-    {
-        Job *next = inicio->next;
-        free(inicio);
-    }
-
-    Job *original = inicio;
-    while (inicio->next && inicio->next->job == job)
-    {
-        inicio = inicio->next;
-    }
-    if (inicio->next)
-    {
-        Job *next = inicio->next->next;
-        free(inicio->next);
-        inicio->next = next;
-    }
-
-    return original;
-}

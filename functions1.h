@@ -1,5 +1,5 @@
 /**
- * @file structs.h
+ * @file functions1.h
  * @author André (a21112@alunos.ipca.pt)
  * @brief Lista Ligadas Simples
  * @version 0.1
@@ -37,20 +37,6 @@ typedef struct Maquina
     struct Maquina *next, *prev;
 } Maquina;
 
-/**
- * @brief Estrutura de dados do job
- * 
- * @param job Job
- */
-typedef struct Job{
-    int job;
-    int proc;
-    int op;
-    int tempo;
-    struct Job *next, *prev;
-    struct Maquina *first, *last;
-} Job;
-
 Maquina *CriaMaquina(int novoOp, int novoProc, int novoTempo);
 Maquina *InserirMaquina(Maquina *inicio, Maquina *nova);
 bool ExisteMaquina(Maquina *inicio, int proc);
@@ -65,10 +51,3 @@ Maquina *AlteraMaquina(Maquina *inicio, int elemento, int index);
 void ListaMaquina(Maquina *inicio);
 int SomaMenorTempo(Maquina *inicio);
 int SomaMaiorTempo(Maquina *inicio);
-
-Job *CriaJob(int novoJob, int novoOp, int novoProc, int novoTempo);
-Job *InserirJob(Job *inicio, Job *nova);
-void EscreverJob(Job *lst);
-Job *LerJob(const char *nomeFicheiro);
-void ListaJob(Job *inicio);
-Job *RemoveJob(Job *inicio, int job);

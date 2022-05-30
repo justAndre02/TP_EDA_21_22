@@ -18,7 +18,7 @@
 #include <locale.h>
 #include <windows.h>
 
-#include "functions.h"
+#include "functions1.h"
 
 
 

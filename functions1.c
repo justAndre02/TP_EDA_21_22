@@ -19,7 +19,7 @@
 #include <stdbool.h>
 #include <assert.h>
 
-#include "functions.h"
+#include "functions1.h"
 
 Maquina *CriaMaquina(int novoOp, int novoProc, int novoTempo)
 {
