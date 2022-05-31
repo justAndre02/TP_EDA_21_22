@@ -23,7 +23,7 @@
 int main()
 {
     Job *lista = NULL;
-    Maquina *list = NULL;
+    
     Cel plano[M][T];
 
     int opc = 0;
@@ -32,95 +32,72 @@ int main()
     int mId = 0;
     int tId = 0;
 
-    opc = printf("teste");
-    lista = CriaJob(lista, 1);
-    ListaJob(lista, list);
+    while (true)
+    {
+        SetConsoleOutputCP(65001);
+        printf("\n----------------------MENU----------------------");
+        printf("\n1 - INSERIR JOB");
+        printf("\n2 - REMOVER JOB");
+        printf("\n3 - INSERIR OPERAÇÃO NUM JOB");
+        printf("\n4 - REMOVER OPERAÇÃO DE UM JOB");
+        printf("\n5 - ALTERAR OPERAÇÃO DE UM JOB");
+        printf("\n6 - PROPOSTA DE ESCALONAMENTO");
+        printf("\n7 - LEITURA DO FICHEIRO");
+        printf("\n\nSELECIONE A SUA OPÇÃO: ");
+        scanf("%d", &opc);
+        switch (opc)
+        {
+        case 1:
+            lista = CriaJob(lista, 1);
+            lista = InsereJob(lista, 1, 1, 1, 1);
+            lista = InsereJob(lista, 1, 1, 2, 4);
+            lista = InsereJob(lista, 1, 2, 3, 3);
+            lista = InsereJob(lista, 1, 2, 4, 8);
+            lista = InsereJob(lista, 1, 3, 5, 9);
+            lista = InsereJob(lista, 1, 3, 6, 5);
 
-    // while (true)
-    // {
-    //     SetConsoleOutputCP(65001);
-    //     printf("\n----------------------MENU----------------------");
-    //     printf("\n1 - INSERIR JOB");
-    //     printf("\n2 - REMOVER JOB");
-    //     printf("\n3 - INSERIR OPERAÇÃO NUM JOB");
-    //     printf("\n4 - REMOVER OPERAÇÃO DE UM JOB");
-    //     printf("\n5 - ALTERAR OPERAÇÃO DE UM JOB");
-    //     printf("\n6 - PROPOSTA DE ESCALONAMENTO");
-    //     printf("\n\nSELECIONE A SUA OPÇÃO: ");
-    //     scanf("%d", &opc);
-    //     switch (opc)
-    //     {
-    //     case 1:
-    //         lista = InserirJob(lista, CriaJob(1, 1, 1, 4));
-            
-    //         EscreverJob(lista);
-    //         ListaJob(lista);
-    //         break;
+            lista = CriaJob(lista, 2);
+            lista = InsereJob(lista, 2, 1, 1, 3);
+            lista = InsereJob(lista, 2, 2, 1, 6);
+            lista = InsereJob(lista, 2, 2, 2, 4);
 
-    //     case 2:
-    //         printf("\nQual a posição do Job a remover: ");
-    //         scanf("%d", &opc);
-    //         plano = RemoveJob(plano, opc);
-    //         ListaJob(plano);
-    //         break;
 
-    //     case 3:
-    //         printf("Escolha um job: ");
-    //         scanf("%d", &jId);
+            EscreveFicheiro(lista);
+            ListaJob(lista);
+            break;
 
-    //         for (; plano; plano = plano->next)
-    //         {
-    //             if (jId == plano->job)
-    //             {
-    //                printf("\nEste Job não existe\n");
-    //                system("pause");
-    //                main();
-    //             }
-    //         }
+        case 2:
+            ListaJob(lista);
+            printf("\nQual Job deseja remover: ");
+            scanf("%d", &jId);
+            lista = RemoverJob(lista, jId);
+            ListaJob(lista);
+            break;
 
-    //         printf("Escolha uma operação: ");
-    //         scanf("%d", &oId);
+        case 3:
 
-    //         for (; plano; plano = plano->next)
-    //         {
-    //             if ((jId == plano->job) && (!(((plano->op) - 1) == (oId - 1))))
-    //             {
-    //                 printf("Não é possível criar esta operação porque não existe a operação %d\n", &oId - 1);
-    //                 system("pause");
-    //                 main();
-    //             }
-    //         }
+            break;
 
-    //         printf("Escolha uma maquina: ");
-    //         scanf("%d", &mId);
+        case 4:
+            break;
 
-    //         printf("Escolha um tempo: ");
-    //         scanf("%d", &tId);
+        case 5:
+            break;
 
-    //         plano = InserirJob(plano, CriaJob(jId, oId, mId, tId));
+        case 6:
+            break;
 
-    //         EscreverJob(plano);
-    //         ListaJob(plano);
-    //         break;
+        case 7:
+            lista = LerJob("dados.txt");
+            ListaJob(lista);
+            break;
+        
+        default:
+            system("pause");
 
-    //     case 4:
-    //         break;
+            exit(0);
 
-    //     case 5:
-    //         break;
-
-    //     case 6:
-
-    //         lista = LerJob("plano_de_processos2.csv");
-    //         ListaJob(lista);
-    //         break;
-
-    //     default:
-    //         system("pause");
-
-    //         exit(0);
-
-    //         break;
-    //     }
-    // }
+            break;
+        }
+    }
 }

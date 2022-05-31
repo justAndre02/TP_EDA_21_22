@@ -29,7 +29,7 @@ typedef struct Maquina{
 typedef struct Job{
     int job;
     struct Job *next, *prev;
-    struct Maquina* first, last;
+    struct Maquina *first, *last;
 }Job;
 
 typedef struct Cel{
@@ -41,4 +41,6 @@ Job *CriaJob(Job *list, int jobid);
 Maquina *CriaMaquina(Maquina *list, int opid,int maquinaid, int tempo); 
 Job *InsereJob(Job *list, int jobid, int opid, int maquinaid, int tempo);
 Job *LerJob(const char *nomeFicheiro);
-void ListaJob(Job *inicio, Maquina *lista);
+void ListaJob(Job *inicio);
+void EscreveFicheiro(Job *list);
+Job *RemoverJob(Job *inicio, int jobid);

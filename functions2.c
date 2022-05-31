@@ -65,8 +65,8 @@ Job *InsereJob(Job *list, int jobid, int opid, int maquinaid, int tempo)
 
         if (inicio->job != jobid)
         {
-            printf("Job not found!");
-            break;
+            printf("Job não foi encontrado");
+            exit(0);
         }
 
         inicio = inicio->next;
@@ -75,11 +75,11 @@ Job *InsereJob(Job *list, int jobid, int opid, int maquinaid, int tempo)
 
     if (!inicio->last)
     {
-        inicio->first = inicio->last = CriaMaquina(inicio->last, maquinaid, opid, tempo);
+        inicio->first = inicio->last = CriaMaquina(inicio->last, opid, maquinaid, tempo);
     }
     else
     {
-        inicio->last = CriaMaquina(inicio->last, maquinaid, opid, tempo);
+        inicio->last = CriaMaquina(inicio->last, opid, maquinaid, tempo);
     }
 
     return list;
@@ -88,14 +88,9 @@ Job *InsereJob(Job *list, int jobid, int opid, int maquinaid, int tempo)
 Job *LerJob(const char *nomeFicheiro)
 {
     FILE *fp;
-    char texto[MAX];
-    
+    fp = fopen(nomeFicheiro, "r");
     Job *inicio = NULL;
-    Job auxjob;
-    Maquina auxop;
-    Maquina auxmaq;
 
-    fp = fopen(nomeFicheiro, "r+");
     if (fp == NULL)
     {
         perror("Failed to open file");
@@ -104,16 +99,74 @@ Job *LerJob(const char *nomeFicheiro)
 
     while (!feof(fp))
     {
-        sscanf(texto, "%d,%d,%d,%d", &auxjob.job, &auxop.op, &auxmaq.maquina, &auxmaq.tempo);
+        char texto[100];
+        int jobid;
+        int opid;
+        int maquinaid;
+        int tempo;
+
+        fgets(texto, 100, fp);
+        sscanf(texto, "%d,%d,%d,%d", &jobid, &opid, &maquinaid, &tempo);
+        inicio = CriaJob(inicio, jobid);
+        inicio = InsereJob(inicio, jobid, opid, maquinaid, tempo);
     }
 
     fclose(fp);
     return inicio;
 }
 
-void ListaJob(Job *inicio, Maquina *lista){
-    if (inicio){
-        printf("%d, %d, %d, %d\n", inicio->job, lista->op, lista->maquina, lista->tempo);
-        ListaJob(inicio->next, lista->next);
+void ListaJob(Job *inicio){
+    for (; inicio; inicio = inicio -> next){
+        Maquina *atual = inicio->first;
+
+        for (; atual;){
+
+            printf("%d, %d, %d, %d\n", inicio->job, atual->op, atual->maquina, atual->tempo);
+            atual = atual->next;
+        }
+    }      
+}
+
+void EscreveFicheiro(Job *list){
+    
+    FILE *fp;
+    fp = fopen("dados.txt", "w+");
+
+    for (; list; list = list->next){
+        Maquina *inicio = list->first;
+
+        for (;inicio;){
+            fprintf(fp, "%d,%d,%d,%d\n", list->job, inicio->op, inicio->maquina, inicio->tempo);
+            inicio = inicio->next;
+        }
     }
+    fclose(fp);
+}
+
+Job *RemoverJob(Job *inicio, int jobid)
+{
+    for (; inicio; inicio = inicio->next)
+    {
+        if (inicio->job == jobid)
+        {
+            Maquina *atual = inicio->first;
+
+            for (; atual;)
+            {
+                if (inicio->first->next)
+                {
+                    inicio->first = inicio->first->next;
+                    inicio->next->prev = NULL;
+                }
+                else
+                {
+                    inicio->first = NULL;
+                    inicio->last = NULL;
+                }
+                free(atual);
+                atual = atual->next;
+            }
+        }
+    }
+    return inicio;
 }
