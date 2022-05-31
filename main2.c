@@ -23,6 +23,7 @@
 int main()
 {
     Job *lista = NULL;
+    Maquina *list = NULL;
     Cel plano[M][T];
 
     int opc = 0;
@@ -32,8 +33,8 @@ int main()
     int tId = 0;
 
     opc = printf("teste");
-    lista = LerJob("plano_de_processos2.txt");
-    ListaJob(lista);
+    lista = CriaJob(lista, 1);
+    ListaJob(lista, list);
 
     // while (true)
     // {

@@ -21,7 +21,69 @@
 
 #include "functions2.h"
 
+Job *CriaJob(Job *list, int jobid) 
+{
+    Job *novo = (Job *)malloc(sizeof(Job));
 
+    novo->job = jobid;
+    novo->first = novo->last = NULL;
+    novo->next = list;
+
+    return novo;
+}
+
+Maquina *CriaMaquina(Maquina *list, int opid,int maquinaid, int tempo)
+{
+
+    Maquina *novo = (Maquina *)malloc(sizeof(Maquina));
+
+    novo->op = opid;
+    novo->maquina = maquinaid;
+    novo->tempo = tempo;
+    novo->next = NULL;
+    novo->prev = list;
+
+    if (novo->prev)
+    {
+        novo->prev->next = novo;
+    }
+    return novo;
+}
+
+Job *InsereJob(Job *list, int jobid, int opid, int maquinaid, int tempo)
+{
+
+    Job *inicio = list;
+
+    while (inicio)
+    {
+
+        if (inicio->job == jobid)
+        {
+            break;
+        }
+
+        if (inicio->job != jobid)
+        {
+            printf("Job not found!");
+            break;
+        }
+
+        inicio = inicio->next;
+
+    }
+
+    if (!inicio->last)
+    {
+        inicio->first = inicio->last = CriaMaquina(inicio->last, maquinaid, opid, tempo);
+    }
+    else
+    {
+        inicio->last = CriaMaquina(inicio->last, maquinaid, opid, tempo);
+    }
+
+    return list;
+}
 
 Job *LerJob(const char *nomeFicheiro)
 {
@@ -49,10 +111,9 @@ Job *LerJob(const char *nomeFicheiro)
     return inicio;
 }
 
-void ListaJob(Job *inicio){
-    Maquina *lista;
+void ListaJob(Job *inicio, Maquina *lista){
     if (inicio){
         printf("%d, %d, %d, %d\n", inicio->job, lista->op, lista->maquina, lista->tempo);
-        ListaJob(inicio->next);
+        ListaJob(inicio->next, lista->next);
     }
 }
