@@ -21,48 +21,7 @@
 
 #include "functions2.h"
 
-Job *CriaJob(int novoJob, int novoOp, int novoMaquina, int novoTempo)
-{
-    Job *nova = malloc(sizeof(Job));
 
-    nova->job = novoJob;
-    nova->ops = novoOp;
-    return nova;
-}
-
-Job *InserirJob(Job *inicio, Job *nova)
-{
-    if (nova == NULL)
-        return inicio;
-
-    if (inicio == NULL)
-    {
-        inicio = nova;
-        return (inicio);
-    }
-    else
-    {
-        Job *aux = inicio;
-        Job *antAux = aux;
-        while (aux != NULL && aux->job > nova->job)
-        {
-            antAux = aux;
-            aux = aux->next;
-        }
-        if (aux == inicio)
-        {
-            nova->next = inicio;
-            inicio = nova;
-            return inicio;
-        }
-        if (aux != NULL)
-        {
-            nova->next = aux;
-            antAux->next = nova;
-        }
-    }
-    return inicio;
-} 
 
 Job *LerJob(const char *nomeFicheiro)
 {
@@ -90,3 +49,10 @@ Job *LerJob(const char *nomeFicheiro)
     return inicio;
 }
 
+void ListaJob(Job *inicio){
+    Maquina *lista;
+    if (inicio){
+        printf("%d, %d, %d, %d\n", inicio->job, lista->op, lista->maquina, lista->tempo);
+        ListaJob(inicio->next);
+    }
+}

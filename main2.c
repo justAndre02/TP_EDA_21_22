@@ -31,89 +31,95 @@ int main()
     int mId = 0;
     int tId = 0;
 
-    while (true)
-    {
-        SetConsoleOutputCP(65001);
-        printf("\n----------------------MENU----------------------");
-        printf("\n1 - INSERIR JOB");
-        printf("\n2 - REMOVER JOB");
-        printf("\n3 - INSERIR OPERAÇÃO NUM JOB");
-        printf("\n4 - REMOVER OPERAÇÃO DE UM JOB");
-        printf("\n5 - ALTERAR OPERAÇÃO DE UM JOB");
-        printf("\n6 - PROPOSTA DE ESCALONAMENTO");
-        printf("\n\nSELECIONE A SUA OPÇÃO: ");
-        scanf("%d", &opc);
-        switch (opc)
-        {
-        case 1:
-            lista = InserirJob(lista, CriaJob(1, 1, 1, 4));
+    opc = printf("teste");
+    lista = LerJob("plano_de_processos2.txt");
+    ListaJob(lista);
+
+    // while (true)
+    // {
+    //     SetConsoleOutputCP(65001);
+    //     printf("\n----------------------MENU----------------------");
+    //     printf("\n1 - INSERIR JOB");
+    //     printf("\n2 - REMOVER JOB");
+    //     printf("\n3 - INSERIR OPERAÇÃO NUM JOB");
+    //     printf("\n4 - REMOVER OPERAÇÃO DE UM JOB");
+    //     printf("\n5 - ALTERAR OPERAÇÃO DE UM JOB");
+    //     printf("\n6 - PROPOSTA DE ESCALONAMENTO");
+    //     printf("\n\nSELECIONE A SUA OPÇÃO: ");
+    //     scanf("%d", &opc);
+    //     switch (opc)
+    //     {
+    //     case 1:
+    //         lista = InserirJob(lista, CriaJob(1, 1, 1, 4));
             
-            //EscreverJob(lista);
-            //ListaJob(lista);
-            break;
+    //         EscreverJob(lista);
+    //         ListaJob(lista);
+    //         break;
 
-        case 2:
-            // printf("\nQual a posição do Job a remover: ");
-            // scanf("%d", &opc);
-            // plano = RemoveJob(plano, opc);
-            // ListaJob(plano);
-            // break;
+    //     case 2:
+    //         printf("\nQual a posição do Job a remover: ");
+    //         scanf("%d", &opc);
+    //         plano = RemoveJob(plano, opc);
+    //         ListaJob(plano);
+    //         break;
 
-        case 3:
-            // printf("Escolha um job: ");
-            // scanf("%d", &jId);
+    //     case 3:
+    //         printf("Escolha um job: ");
+    //         scanf("%d", &jId);
 
-            // for (; plano; plano = plano->next)
-            // {
-            //     if (jId == plano->job)
-            //     {
-            //         printf("\nEste Job não existe\n");
-            //         system("pause");
-            //         main();
-            //     }
-            // }
+    //         for (; plano; plano = plano->next)
+    //         {
+    //             if (jId == plano->job)
+    //             {
+    //                printf("\nEste Job não existe\n");
+    //                system("pause");
+    //                main();
+    //             }
+    //         }
 
-            // printf("Escolha uma operação: ");
-            // scanf("%d", &oId);
+    //         printf("Escolha uma operação: ");
+    //         scanf("%d", &oId);
 
-            // for (; plano; plano = plano->next)
-            // {
-            //     if ((jId == plano->job) && (!(((plano->op) - 1) == (oId - 1))))
-            //     {
-            //         printf("Não é possível criar esta operação porque não existe a operação %d\n", &oId - 1);
-            //         system("pause");
-            //         main();
-            //     }
-            // }
+    //         for (; plano; plano = plano->next)
+    //         {
+    //             if ((jId == plano->job) && (!(((plano->op) - 1) == (oId - 1))))
+    //             {
+    //                 printf("Não é possível criar esta operação porque não existe a operação %d\n", &oId - 1);
+    //                 system("pause");
+    //                 main();
+    //             }
+    //         }
 
-            // printf("Escolha uma maquina: ");
-            // scanf("%d", &mId);
+    //         printf("Escolha uma maquina: ");
+    //         scanf("%d", &mId);
 
-            // printf("Escolha um tempo: ");
-            // scanf("%d", &tId);
+    //         printf("Escolha um tempo: ");
+    //         scanf("%d", &tId);
 
-            // plano = InserirJob(plano, CriaJob(jId, oId, mId, tId));
+    //         plano = InserirJob(plano, CriaJob(jId, oId, mId, tId));
 
-            // EscreverJob(plano);
-            // ListaJob(plano);
-            break;
+    //         EscreverJob(plano);
+    //         ListaJob(plano);
+    //         break;
 
-        case 4:
-            break;
+    //     case 4:
+    //         break;
 
-        case 5:
-            break;
+    //     case 5:
+    //         break;
 
-        case 6:
-            lista = LerJob("plano_de_processos2.csv");
-            break;
+    //     case 6:
 
-        default:
-            system("pause");
+    //         lista = LerJob("plano_de_processos2.csv");
+    //         ListaJob(lista);
+    //         break;
 
-            exit(0);
+    //     default:
+    //         system("pause");
 
-            break;
-        }
-    }
+    //         exit(0);
+
+    //         break;
+    //     }
+    // }
 }

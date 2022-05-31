@@ -37,6 +37,6 @@ typedef struct Cel{
     int idop;
 }Cel;
 
-Job *CriaJob(int novoJob, int novoOp, int novoMaquina, int novoTempo);
-Job *InserirJob(Job *inicio, Job *nova);
+
 Job *LerJob(const char *nomeFicheiro);
+void ListaJob(Job *inicio);
