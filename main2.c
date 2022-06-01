@@ -26,11 +26,15 @@ int main()
 
     Cel plano[M][T];
 
+    FILE *ficheiro;
     int opc = 0;
     int jId;
     int oId;
     int mId;
     int tId;
+    int nova;
+    int inicio;
+    int final;
 
     while (true)
     {
@@ -42,7 +46,7 @@ int main()
         printf("\n4 - REMOVER OPERAÇÃO DE UM JOB");
         printf("\n5 - ALTERAR OPERAÇÃO DE UM JOB");
         printf("\n6 - PROPOSTA DE ESCALONAMENTO");
-        printf("\n7 - LEITURA DO FICHEIRO");
+        printf("\n7 - LEITURA DOS DADOS");
         printf("\n\nSELECIONE A SUA OPÇÃO: ");
         scanf("%d", &opc);
         switch (opc)
@@ -96,15 +100,79 @@ int main()
             break;
 
         case 4:
-            //ListaJob(lista);
-            RemoverOperacao(lista, 1, 1);
+            printf("Escolha um Job: ");
+            scanf("%d", &jId);
+            printf("\nRemova a operação desejada: ");
+            scanf("%d", &oId);
+            RemoverOperacao(lista, jId, oId);
+            EscreveFicheiro(lista);
             ListaJob(lista);
             break;
 
         case 5:
+            printf("O que deseja alterar numa operação?\n");
+            printf("1 - Id da Operação\n");
+            printf("2 - Maquina\n");
+            printf("3 - Tempo\n");
+            printf("Escolha: ");
+            scanf("%d", &opc);
+            if (opc == 1){
+                printf("Escolha o Job da operação a alterar: ");
+                scanf("%d", &jId);
+                printf("Escolha a operação a alterar: ");
+                scanf("%d", &oId);
+                printf("Escolha a nova operação: ");
+                scanf("%d", &nova);
+                EditarOperacao(lista, jId, oId, nova);
+                EscreveFicheiro(lista);
+                ListaJob(lista);
+            }else if (opc == 2){
+                printf("Escolha o Job da operação a alterar: ");
+                scanf("%d", &jId);
+                printf("Escolha a operação da máquina a alterar: ");
+                scanf("%d", &oId);
+                printf("Escolha a máquina a alterar: ");
+                scanf("%d", &mId);
+                printf("Escolha a nova máquina: ");
+                scanf("%d", &nova);
+                EditarMaquina(lista, jId, oId, mId, nova);
+                EscreveFicheiro(lista);
+                ListaJob(lista);
+            }else if (opc == 3){
+                printf("Escolha o Job da operação a alterar: ");
+                scanf("%d", &jId);
+                printf("Escolha a operação da máquina a alterar: ");
+                scanf("%d", &oId);
+                printf("Escolha a máquina do tempo a alterar: ");
+                scanf("%d", &mId);
+                printf("Escolha a novo tempo: ");
+                scanf("%d", &nova);
+                EditarTempo(lista, jId, oId, mId, nova);
+                EscreveFicheiro(lista);
+                ListaJob(lista);
+            }
+            else{
+                printf("Operação inválida\n");
+                main();
+            }
+            
             break;
 
         case 6:
+            printf("________________________________\n");
+            printf("|Apenas escolha Jobs existentes|\n");
+            printf("********************************\n");
+            printf("\nEscolha uma máquina: ");
+            scanf("%d", &mId);
+            printf("Escolha o inicio do processo: ");
+            scanf("%d", &inicio);
+            printf("Escolha o final do processo: ");
+            scanf("%d", &final);
+            printf("Escolha um Job: ");
+            scanf("%d", &jId);
+            printf("Escolha uma operação: ");
+            scanf("%d", &oId);
+            Ocupa(plano, mId, inicio, final, jId, oId);
             break;
 
         case 7:

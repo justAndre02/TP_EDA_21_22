@@ -35,6 +35,9 @@ typedef struct Job{
 typedef struct Cel{
     int idjob;
     int idop;
+    int inicio;
+    int final;
+    int m;
 }Cel;
 
 Job *CriaJob(Job *list, int jobid);
@@ -45,3 +48,9 @@ void ListaJob(Job *inicio);
 void EscreveFicheiro(Job *list);
 Job *RemoverJob(Job *inicio, int jobid);
 Job *RemoverOperacao(Job *list, int jobid, int opid);
+Job *EditarOperacao(Job *list, int jobid, int opid, int novo_op);
+Job *EditarMaquina(Job *list,int jobid ,int opid, int maquinaid, int nova_maquina);
+Job *EditarTempo(Job *list,int jobid ,int opid, int maquinaid, int novo_tempo);
+void IniciaPlano(Cel p[][T], int codJob, int codOper);
+void OcupaVarios(Cel p[][T], int mId, int totTempo, Cel* c);
+Ocupa(Cel p[][T], int mId, int tempo, int totTempo, int codJ, int codO);
