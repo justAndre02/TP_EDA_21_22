@@ -21,7 +21,7 @@
 
 #include "functions2.h"
 
-Job *CriaJob(Job *list, int jobid) 
+Job *CriaJob(Job *list, int jobid)
 {
     Job *novo = (Job *)malloc(sizeof(Job));
 
@@ -32,7 +32,7 @@ Job *CriaJob(Job *list, int jobid)
     return novo;
 }
 
-Maquina *CriaMaquina(Maquina *list, int opid,int maquinaid, int tempo)
+Maquina *CriaMaquina(Maquina *list, int opid, int maquinaid, int tempo)
 {
 
     Maquina *novo = (Maquina *)malloc(sizeof(Maquina));
@@ -70,7 +70,6 @@ Job *InsereJob(Job *list, int jobid, int opid, int maquinaid, int tempo)
         }
 
         inicio = inicio->next;
-
     }
 
     if (!inicio->last)
@@ -115,27 +114,33 @@ Job *LerJob(const char *nomeFicheiro)
     return inicio;
 }
 
-void ListaJob(Job *inicio){
-    for (; inicio; inicio = inicio -> next){
+void ListaJob(Job *inicio)
+{
+    for (; inicio; inicio = inicio->next)
+    {
         Maquina *atual = inicio->first;
 
-        for (; atual;){
+        for (; atual;)
+        {
 
             printf("%d, %d, %d, %d\n", inicio->job, atual->op, atual->maquina, atual->tempo);
             atual = atual->next;
         }
-    }      
+    }
 }
 
-void EscreveFicheiro(Job *list){
-    
+void EscreveFicheiro(Job *list)
+{
+
     FILE *fp;
     fp = fopen("dados.txt", "w+");
 
-    for (; list; list = list->next){
+    for (; list; list = list->next)
+    {
         Maquina *inicio = list->first;
 
-        for (;inicio;){
+        for (; inicio;)
+        {
             fprintf(fp, "%d,%d,%d,%d\n", list->job, inicio->op, inicio->maquina, inicio->tempo);
             inicio = inicio->next;
         }
@@ -143,30 +148,60 @@ void EscreveFicheiro(Job *list){
     fclose(fp);
 }
 
-Job *RemoverJob(Job *inicio, int jobid)
+Job *RemoverJob(Job *list, int jobid)
 {
-    for (; inicio; inicio = inicio->next)
+    for (; list; list = list->next)
     {
-        if (inicio->job == jobid)
+        if (list->job == jobid)
         {
-            Maquina *atual = inicio->first;
+            Maquina *inicio = list->first;
 
-            for (; atual;)
+            for (; inicio;)
             {
-                if (inicio->first->next)
+                if (list->first->next)
                 {
-                    inicio->first = inicio->first->next;
-                    inicio->next->prev = NULL;
+                    list->first = list->first->next;
+                    list->next->prev = NULL;
                 }
                 else
                 {
-                    inicio->first = NULL;
-                    inicio->last = NULL;
+                    list->first = NULL;
+                    list->last = NULL;
                 }
-                free(atual);
-                atual = atual->next;
+                free(inicio);
+                inicio = inicio->next;
             }
         }
     }
-    return inicio;
+    return list;
+}
+
+Job *RemoverOperacao(Job *list, int jobid, int opid)
+{
+    for (; list; list = list->next)
+    {
+        if (list->job == jobid)
+        {
+            Maquina *inicio = list->first;
+
+            for (; inicio; inicio = inicio->next)
+            {
+                if (inicio->op == opid)
+                {
+                    if (list->first->next)
+                    {
+                        list->first = list->first->next;
+                        list->next->prev = NULL;
+                    }
+                    else
+                    {
+                        list->first = NULL;
+                        list->last = NULL;
+                    }
+                    free(inicio);
+                }
+            }
+        }
+    }
+    return list;
 }

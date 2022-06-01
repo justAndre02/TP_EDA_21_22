@@ -44,3 +44,4 @@ Job *LerJob(const char *nomeFicheiro);
 void ListaJob(Job *inicio);
 void EscreveFicheiro(Job *list);
 Job *RemoverJob(Job *inicio, int jobid);
+Job *RemoverOperacao(Job *list, int jobid, int opid);

@@ -23,14 +23,14 @@
 int main()
 {
     Job *lista = NULL;
-    
+
     Cel plano[M][T];
 
     int opc = 0;
-    int jId = 0;
-    int oId = 0;
-    int mId = 0;
-    int tId = 0;
+    int jId;
+    int oId;
+    int mId;
+    int tId;
 
     while (true)
     {
@@ -49,18 +49,27 @@ int main()
         {
         case 1:
             lista = CriaJob(lista, 1);
-            lista = InsereJob(lista, 1, 1, 1, 1);
-            lista = InsereJob(lista, 1, 1, 2, 4);
-            lista = InsereJob(lista, 1, 2, 3, 3);
-            lista = InsereJob(lista, 1, 2, 4, 8);
-            lista = InsereJob(lista, 1, 3, 5, 9);
-            lista = InsereJob(lista, 1, 3, 6, 5);
+            lista = InsereJob(lista, 1, 1, 1, 6);
+            printf("Insira um Job: ");
+            scanf("%d,%d,%d,%d", &jId, &oId, &mId, &tId);
 
             lista = CriaJob(lista, 2);
-            lista = InsereJob(lista, 2, 1, 1, 3);
-            lista = InsereJob(lista, 2, 2, 1, 6);
-            lista = InsereJob(lista, 2, 2, 2, 4);
+            lista = InsereJob(lista, 2, 1, 2, 3);
+            printf("Insira um Job: ");
+            scanf("%d,%d,%d,%d", &jId, &oId, &mId, &tId);
+            lista = InsereJob(lista, jId, oId, mId, tId);
 
+            lista = CriaJob(lista, 3);
+            lista = InsereJob(lista, 3, 1, 3, 4);
+            printf("Insira um Job: ");
+            scanf("%d,%d,%d,%d", &jId, &oId, &mId, &tId);
+            lista = InsereJob(lista, jId, oId, mId, tId);
+
+            lista = CriaJob(lista, 4);
+            lista = InsereJob(lista, 4, 1, 4, 7);
+            printf("Insira um Job: ");
+            scanf("%d,%d,%d,%d", &jId, &oId, &mId, &tId);
+            lista = InsereJob(lista, jId, oId, mId, tId);
 
             EscreveFicheiro(lista);
             ListaJob(lista);
@@ -70,15 +79,26 @@ int main()
             ListaJob(lista);
             printf("\nQual Job deseja remover: ");
             scanf("%d", &jId);
-            lista = RemoverJob(lista, jId);
+            RemoverJob(lista, jId);
             ListaJob(lista);
             break;
 
         case 3:
-
+            ListaJob(lista);
+            printf("Em qual Job deseja inserir a operação: \n");
+            scanf("%d", &jId);
+            lista = CriaJob(lista, jId);
+            printf("Insira a operação: ");
+            scanf("%d,%d,%d", &oId, &mId, &tId);
+            lista = InsereJob(lista, jId, oId, mId, tId);
+            EscreveFicheiro(lista);
+            ListaJob(lista);
             break;
 
         case 4:
+            //ListaJob(lista);
+            RemoverOperacao(lista, 1, 1);
+            ListaJob(lista);
             break;
 
         case 5:
@@ -91,7 +111,7 @@ int main()
             lista = LerJob("dados.txt");
             ListaJob(lista);
             break;
-        
+
         default:
             system("pause");
 
