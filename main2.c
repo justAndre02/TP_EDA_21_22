@@ -5,7 +5,8 @@
  * @version 0.1
  * @date 2022-06-01
  *
- * Main que chama todas as funções criadas no ficheiro "functions.c"
+ * Main que chama todas as funções criadas no ficheiro "functions2.c"
+ * Contém um menu interativo básico
  *
  * @copyright Copyright (c) 2022
  *
@@ -52,25 +53,23 @@ int main()
         switch (opc)
         {
         case 1:
+            printf("!Escreva todos os campos!\n");
             lista = CriaJob(lista, 1);
-            lista = InsereJob(lista, 1, 1, 1, 6);
             printf("Insira um Job: ");
             scanf("%d,%d,%d,%d", &jId, &oId, &mId, &tId);
+            lista = InsereJob(lista, jId, oId, mId, tId);
 
             lista = CriaJob(lista, 2);
-            lista = InsereJob(lista, 2, 1, 2, 3);
             printf("Insira um Job: ");
             scanf("%d,%d,%d,%d", &jId, &oId, &mId, &tId);
             lista = InsereJob(lista, jId, oId, mId, tId);
 
             lista = CriaJob(lista, 3);
-            lista = InsereJob(lista, 3, 1, 3, 4);
             printf("Insira um Job: ");
             scanf("%d,%d,%d,%d", &jId, &oId, &mId, &tId);
             lista = InsereJob(lista, jId, oId, mId, tId);
 
-            lista = CriaJob(lista, 4);
-            lista = InsereJob(lista, 4, 1, 4, 7);
+            lista = CriaJob(lista, 4); 
             printf("Insira um Job: ");
             scanf("%d,%d,%d,%d", &jId, &oId, &mId, &tId);
             lista = InsereJob(lista, jId, oId, mId, tId);
@@ -89,9 +88,10 @@ int main()
 
         case 3:
             ListaJob(lista);
-            printf("Em qual Job deseja inserir a operação: \n");
+            printf("Em qual Job deseja inserir a operação: ");
             scanf("%d", &jId);
             lista = CriaJob(lista, jId);
+            printf("!Escreva todos os campos!\n");
             printf("Insira a operação: ");
             scanf("%d,%d,%d", &oId, &mId, &tId);
             lista = InsereJob(lista, jId, oId, mId, tId);

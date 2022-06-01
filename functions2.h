@@ -19,6 +19,16 @@
 #define M 4
 #define T 10
 
+/**
+ * @brief Estrutura Máquina
+ * 
+ * @param maquina Armazena as máquinas
+ * @param op Armazena as operações
+ * @param tempo Armazena os tempos
+ * @param next Apontador para direita
+ * @param prev Apontador para a esquerda
+ * 
+ */
 typedef struct Maquina{
     int maquina;
     int op;
@@ -26,18 +36,33 @@ typedef struct Maquina{
     struct Maquina* next, *prev;
 }Maquina;
 
+/**
+ * @brief Armazena os Jobs
+ * 
+ * @param job Armazena os Jobs
+ * @param next Apontador para direita
+ * @param prev Apontador para a esquerda
+ * @param first Apontador da stuct Maquina
+ * @param last Apontador da struct Maquina
+ */
 typedef struct Job{
     int job;
     struct Job *next, *prev;
     struct Maquina *first, *last;
 }Job;
 
+/**
+ * @brief Aloca as células de planeamento
+ * 
+ * @param idjob Guarda o Job de uma célula
+ * @param idop Guarda a operação de uma célula
+ * @param inicio Guarda o tempo de inicio de uma máquina
+ * 
+ */
 typedef struct Cel{
     int idjob;
     int idop;
     int inicio;
-    int final;
-    int m;
 }Cel;
 
 Job *CriaJob(Job *list, int jobid);

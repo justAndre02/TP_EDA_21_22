@@ -5,10 +5,11 @@
  * @version 0.1
  * @date 2022-01-01
  *
- *  Funções de manipulação de Listas Ligadas
+ * Funções de manipulação de Listas Ligadas
  *
- *  Ficheiro baseado no repositório do professor
- * @see https://github.com/luferIPCA/LESI-EDA-2122/tree/master/Aulas/Aula%205%20-%20Listas%20Ligadas%20Gen%C3%A9ricas
+ * Ficheiro baseado no repositório do professor
+ * 
+ * @see https://github.com/luferIPCA/LESI-EDA-2122/tree/master/Aulas/Planeamento
  * @copyright Copyright (c) 2022
  *
  */
@@ -21,6 +22,15 @@
 
 #include "functions2.h"
 
+/**
+ * @brief Função encarregue de criar um Job
+ * 
+ * @param list Lista da struct Job
+ * @param jobid Identificação de um Job
+ * @param novo Apontador que percorre toda a lista
+ * 
+ * @return Job criado
+ */
 Job *CriaJob(Job *list, int jobid)
 {
     Job *novo = (Job *)malloc(sizeof(Job));
@@ -32,6 +42,17 @@ Job *CriaJob(Job *list, int jobid)
     return novo;
 }
 
+/**
+ * @brief Função encarregue de criar uma Máquina
+ * 
+ * @param list Lista da struct Maquina
+ * @param opid Identificação de uma operação
+ * @param maquinaid Identificação de uma máquina
+ * @param tempo Valor temporal de uma máquina
+ * @param novo Apontador que percorre toda a lista
+ * 
+ * @return Operação criada
+ */
 Maquina *CriaMaquina(Maquina *list, int opid, int maquinaid, int tempo)
 {
 
@@ -50,6 +71,18 @@ Maquina *CriaMaquina(Maquina *list, int opid, int maquinaid, int tempo)
     return novo;
 }
 
+/**
+ * @brief Função responsável po inserir um Job na lista
+ * 
+ * @param list Lista da struct Job
+ * @param jobid Identificação de um Job
+ * @param opid Identificação de uma operação
+ * @param maquinaid Identificação de uma máquina
+ * @param tempo Valor temporal de uma máquina
+ * @param inicio Apontador que percorre toda a lista
+ * 
+ * @return Lista de Jobs
+ */
 Job *InsereJob(Job *list, int jobid, int opid, int maquinaid, int tempo)
 {
     Job *inicio = list;
@@ -83,6 +116,14 @@ Job *InsereJob(Job *list, int jobid, int opid, int maquinaid, int tempo)
     return list;
 }
 
+/**
+ * @brief Função que lê toda a informação de um ficheiro e insere na memória
+ * 
+ * @param nomeFicheiro Nome do ficheiro a ler
+ * @param inicio Apontador que percorre toda a lista
+ * 
+ * @return Lista de Jobs
+ */
 Job *LerJob(const char *nomeFicheiro)
 {
     FILE *fp;
@@ -113,6 +154,12 @@ Job *LerJob(const char *nomeFicheiro)
     return inicio;
 }
 
+/**
+ * @brief Função que lista toda informação armazenada na memória
+ * 
+ * @param inicio Lista da estrutura Job
+ * @param atual Apontador que percorre toda a lista da estrutura Maquina
+ */
 void ListaJob(Job *inicio)
 {
     for (; inicio; inicio = inicio->next)
@@ -128,6 +175,12 @@ void ListaJob(Job *inicio)
     }
 }
 
+/**
+ * @brief Função que escreve num ficheiro toda a informação armazenada na memória
+ * 
+ * @param list Lista da estrutura Job
+ * @param inicio Apontador que percorre toda a lista da estrutura Maquina
+ */
 void EscreveFicheiro(Job *list)
 {
     FILE *fp;
@@ -146,6 +199,15 @@ void EscreveFicheiro(Job *list)
     fclose(fp);
 }
 
+/**
+ * @brief Função que remove todos os Jobs com o mesmo Id
+ * 
+ * @param list Lista da estrutura Job
+ * @param jobid Id do Job a remover
+ * @param inicio Apontador que percorre toda a lista da estrutura Maquina
+ * 
+ * @return Lista de Jobs atualizada
+ */
 Job *RemoverJob(Job *list, int jobid)
 {
     for (; list; list = list->next)
@@ -174,6 +236,16 @@ Job *RemoverJob(Job *list, int jobid)
     return list;
 }
 
+/**
+ * @brief Função que remove todas as operações com o mesmo Id do mesmo Job
+ * 
+ * @param list Lista da estrutura Job
+ * @param jobid Identificação de um Job
+ * @param opid Operação a remover
+ * @param inicio Apontador que percorre toda a lista da estrutura Maquina
+ * 
+ * @return Lista de Jobs atualizada
+ */
 Job *RemoverOperacao(Job *list, int jobid, int opid)
 {
     for (; list; list = list->next)
@@ -204,6 +276,17 @@ Job *RemoverOperacao(Job *list, int jobid, int opid)
     return list;
 }
 
+/**
+ * @brief Função que altera a identificação de uma operação de um determinado Job
+ * 
+ * @param list Lista da estrutura Job
+ * @param jobid Identificação de um Job
+ * @param opid Operação a alterar
+ * @param novo_op Identificação da nova operação
+ * @param inicio Apontador que percorre toda a lista da estrutura Maquina
+ * 
+ * @return Lista de Jobs atualizada
+ */
 Job *EditarOperacao(Job *list,int jobid ,int opid, int novo_op)
 {
     for (; list; list = list->next)
@@ -224,6 +307,18 @@ Job *EditarOperacao(Job *list,int jobid ,int opid, int novo_op)
     return list;
 }
 
+/**
+ * @brief Função que muda a máquina de uma determinada operação 
+ * 
+ * @param list Lista da estrutura Job
+ * @param jobid Identificação de um Job
+ * @param opid Operação da máquina a alterar
+ * @param maquinaid Máquina a editar
+ * @param nova_maquina Identificação da nova máquina
+ * @param inicio Apontador que percorre toda a lista da estrutura Maquina
+ * 
+ * @return Lista de Jobs atualizada
+ */
 Job *EditarMaquina(Job *list,int jobid ,int opid, int maquinaid, int nova_maquina)
 {
     for (; list; list = list->next)
@@ -247,6 +342,17 @@ Job *EditarMaquina(Job *list,int jobid ,int opid, int maquinaid, int nova_maquin
     return list;
 }
 
+/**
+ * @brief Função que altera o tempo de uma máquina de uma determinada operação
+ * 
+ * @param list Lista da estrutura Job
+ * @param jobid Identificação de um Job
+ * @param opid Operação da máquina cujo tempo vai ser alterado
+ * @param maquinaid Máquina respetiva ao tempo a mudar
+ * @param novo_tempo Novo tempo a inserir
+ * 
+ * @return Lista de Jobs atualizada
+ */
 Job *EditarTempo(Job *list,int jobid ,int opid, int maquinaid, int novo_tempo)
 {
 
@@ -271,6 +377,15 @@ Job *EditarTempo(Job *list,int jobid ,int opid, int maquinaid, int novo_tempo)
     return list;
 }
 
+/**
+ * @brief Inicia uma tabela constituída por linhas de máquinas e colunas de tempo
+ * 
+ * @param p Plano a criar
+ * @param codJob Job da célula a criar
+ * @param codOper Operação de célula 
+ * @param l Linhas da tabela
+ * @param col Colunas da tabela
+ */
 void IniciaPlano(Cel p[][T], int codJob, int codOper) {
 
 	for (int l = 0; l < M; l++){
@@ -281,6 +396,15 @@ void IniciaPlano(Cel p[][T], int codJob, int codOper) {
 	}
 }
 
+/**
+ * @brief Criação da células a introduzir
+ * 
+ * @param p Plano criado
+ * @param mId Máquina a inserir
+ * @param totTempo Tempo a inserir
+ * @param c Célula criada
+ * @param col Colunas alocadas na tabela
+ */
 void OcupaVarios(Cel p[][T], int mId, int totTempo, Cel* c) {
 	
 	int col = 0;
@@ -298,6 +422,16 @@ void OcupaVarios(Cel p[][T], int mId, int totTempo, Cel* c) {
 
 }
 
+/**
+ * @brief Insere as células selecionadas e lista as linhas da tabela num ficheiro .csv
+ * 
+ * @param p Plano criado
+ * @param mId Máquina a inserir
+ * @param tempo Inicio do tempo de uma máquina
+ * @param totTempo Tempo a inserir
+ * @param codJ Job a inserir numa célula
+ * @param codO Operação a inserir numa célula
+ */
 Ocupa(Cel p[][T], int mId, int tempo, int totTempo, int codJ, int codO) {
     FILE *fpt;
 
