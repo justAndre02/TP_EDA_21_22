@@ -169,9 +169,6 @@ Job *RemoverJob(Job *list, int jobid)
                 free(inicio);
                 inicio = inicio->next;
             }
-        }else {
-            printf("Este Job não existe");
-            exit(0);
         }
     }
     return list;
@@ -201,14 +198,7 @@ Job *RemoverOperacao(Job *list, int jobid, int opid)
                     }
                     free(inicio);
                 }
-                else {
-                    printf("Esta Operação não existe");
-                    exit(0);
-                }
             }
-        }else {
-            printf("Este Job não existe");
-            exit(0);
         }
     }
     return list;
