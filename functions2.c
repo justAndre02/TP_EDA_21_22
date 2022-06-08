@@ -443,4 +443,3 @@ Ocupa(Cel p[][T], int mId, int tempo, int totTempo, int codJ, int codO) {
     fprintf(fpt, "M%d, Job %d - Operação %d, %d, %d\n", mId, codJ, codO, tempo, totTempo);
     fclose(fpt);
 }
-
